@@ -363,7 +363,7 @@ def im_moment_features(IM):
     return features
 
 
-def clean_frames(frames, prefilter_space=(3,), prefilter_time=None,
+def clean_frames(frames, prefilter_space=(3,), prefilter_time=None, otsu_segment=True,
                  strel_tail=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)),
                  iters_tail=None, frame_dtype='uint8',
                  strel_min=cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5)),
@@ -407,6 +407,14 @@ def clean_frames(frames, prefilter_space=(3,), prefilter_time=None,
     if prefilter_time is not None and np.all(np.array(prefilter_time) > 0):
         for j in range(len(prefilter_time)):
             filtered_frames = scipy.signal.medfilt(filtered_frames, [prefilter_time[j], 1, 1])
+    
+    # Apply otsu
+    if otsu_segment is not False:
+        for ind, frame in tqdm(enumerate(filtered_frames), disable=not progress_bar, desc='Computing Otsu'):
+            _,th2 = cv2.threshold(frame,0,1,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+            idx=(th2==0)
+            frame[idx]=th2[idx]
+            filtered_frames[ind,:,:] = frame
 
     return filtered_frames
 
