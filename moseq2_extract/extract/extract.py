@@ -111,9 +111,11 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
     # Apply ROI mask
     if roi is not None:
         chunk = apply_roi(chunk, roi)
+        print(np.sum(roi))
 
     # Denoise the frames before we do anything else
     filtered_frames = clean_frames(chunk,
+                                   max_height=max_height,
                                    prefilter_space=spatial_filter_size,
                                    prefilter_time=temporal_filter_size,
                                    iters_tail=tail_filter_iters,
