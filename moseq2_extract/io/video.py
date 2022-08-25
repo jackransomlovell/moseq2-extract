@@ -429,7 +429,7 @@ def write_frames_preview(filename, frames=np.empty((0,)), threads=6,
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     white = (255, 255, 255)
-    txt_pos = (5, frames.shape[-1] - 40)
+    txt_pos = (5, frames.shape[-1] - 100)
 
     if not np.mod(frames.shape[1], 2) == 0:
         frames = np.pad(frames, ((0, 0), (0, 1), (0, 0)), 'constant', constant_values=0)
