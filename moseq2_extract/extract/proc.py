@@ -327,7 +327,7 @@ def apply_roi(frames, roi):
     return cropped_frames
 
 def apply_otsu(frames, max_height):
-     '''
+    '''
     Apply otsu to data, consider adding some closing technique).
 
     Parameters
