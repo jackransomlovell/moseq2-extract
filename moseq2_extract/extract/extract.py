@@ -15,7 +15,7 @@ import numpy as np
 from copy import deepcopy
 from moseq2_extract.extract.track import em_tracking, em_get_ll
 from moseq2_extract.extract.proc import (crop_and_rotate_frames, threshold_chunk,
-                                         clean_frames, apply_roi, get_frame_features,
+                                         clean_frames, apply_roi, apply_otsu, get_frame_features,
                                          get_flips, compute_scalars, feature_hampel_filter,
                                          model_smoother)
 
@@ -38,7 +38,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   centroid_hampel_span=5, centroid_hampel_sig=3,
                   angle_hampel_span=5, angle_hampel_sig=3,
                   model_smoothing_clips=(-300, -150), tracking_model_init='raw',
-                  compute_raw_scalars=False, apply_otsu=True,
+                  compute_raw_scalars=False, use_otsu=True,
                   **kwargs):
     '''
     This function looks for a mouse in background-subtracted frames from a chunk of depth video.
@@ -111,6 +111,11 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
     # Apply ROI mask
     if roi is not None:
         chunk = apply_roi(chunk, roi)
+    
+    # Apply otsu
+    if use_otsu:
+        chunk = apply_otsu(chunk,max_height)
+
 
     # Denoise the frames before we do anything else
     filtered_frames = clean_frames(chunk,

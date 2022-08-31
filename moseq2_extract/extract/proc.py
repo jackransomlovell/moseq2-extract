@@ -326,7 +326,7 @@ def apply_roi(frames, roi):
     cropped_frames = cropped_frames[:, bbox[0, 0]:bbox[1, 0], bbox[0, 1]:bbox[1, 1]]
     return cropped_frames
 
-def apply_otsu(frames, config_data):
+def apply_otsu(frames, max_height):
      '''
     Apply otsu to data, consider adding some closing technique).
 
@@ -341,7 +341,7 @@ def apply_otsu(frames, config_data):
 
     for i, frame in enumerate(frames):
         # do otsu
-        _,th2 = cv2.threshold(frame.astype('uint8'),0, config_data['max_height'],cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        _,th2 = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         frames[i][th2==0]=0
 
     return frames
