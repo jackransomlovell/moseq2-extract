@@ -339,8 +339,12 @@ def extract_wrapper(input_file, output_dir, config_data, num_frames=None, skip=F
 
     # Compute ROIs
     roi, bground_im, first_frame = get_roi_wrapper(input_file, config_data, output_dir=output_dir)
+<<<<<<< Updated upstream
     if os.path.exists(os.path.join(output_dir, 'roi.npy')):
         roi = np.load(os.path.join(output_dir, 'roi.npy'))
+=======
+    #roi = np.load(os.path.join(output_dir, 'roi.npy'))
+>>>>>>> Stashed changes
 
     # Debugging option: DTD has no effect on extraction results unless dilate iterations > 1
     if config_data.get('detected_true_depth', 'auto') == 'auto':

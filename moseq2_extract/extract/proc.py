@@ -326,6 +326,26 @@ def apply_roi(frames, roi):
     cropped_frames = cropped_frames[:, bbox[0, 0]:bbox[1, 0], bbox[0, 1]:bbox[1, 1]]
     return cropped_frames
 
+def apply_otsu(frames, config_data):
+     '''
+    Apply otsu to data, consider adding some closing technique).
+
+    Parameters
+    ----------
+    frames (3d np.ndarray): input frames to apply otsu on.
+
+    Returns
+    -------
+    otsu_frames (3d np.ndarray): Frames with otsu performed.
+    '''
+
+    for i, frame in enumerate(frames):
+        # do otsu
+        _,th2 = cv2.threshold(frame.astype('uint8'),0, config_data['max_height'],cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        frames[i][th2==0]=0
+
+    return frames
+
 
 def im_moment_features(IM):
     '''
@@ -367,7 +387,7 @@ def clean_frames(frames, max_height=100, prefilter_space=(3,), prefilter_time=No
                  strel_tail=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)),
                  iters_tail=None, frame_dtype='uint8',
                  strel_min=cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5)),
-                 iters_min=None, progress_bar=False):
+                 iters_min=None, progress_bar=True):
     '''
     Simple temporal and/or spatial filtering, median filter and morphological opening.
 
@@ -402,9 +422,6 @@ def clean_frames(frames, max_height=100, prefilter_space=(3,), prefilter_time=No
         # Tail Filter
         if iters_tail is not None and iters_tail > 0:
             filtered_frames[i] = cv2.morphologyEx(filtered_frames[i], cv2.MORPH_OPEN, strel_tail, iters_tail)
-        # Otsu thresholding
-        _,th2 = cv2.threshold(filtered_frames[i],0, int(max_height),cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-        filtered_frames[i][th2==0] = 0
 
     # Temporal Median Filter
     if prefilter_time is not None and np.all(np.array(prefilter_time) > 0):

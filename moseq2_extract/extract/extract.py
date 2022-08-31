@@ -38,7 +38,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   centroid_hampel_span=5, centroid_hampel_sig=3,
                   angle_hampel_span=5, angle_hampel_sig=3,
                   model_smoothing_clips=(-300, -150), tracking_model_init='raw',
-                  compute_raw_scalars=False,
+                  compute_raw_scalars=False, apply_otsu=True,
                   **kwargs):
     '''
     This function looks for a mouse in background-subtracted frames from a chunk of depth video.
@@ -111,7 +111,6 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
     # Apply ROI mask
     if roi is not None:
         chunk = apply_roi(chunk, roi)
-        print(np.sum(roi))
 
     # Denoise the frames before we do anything else
     filtered_frames = clean_frames(chunk,
