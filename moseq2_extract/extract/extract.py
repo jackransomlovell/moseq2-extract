@@ -28,6 +28,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   min_height=10, max_height=100,
                   mask_threshold=-20, use_cc=False,
                   bground=None, roi=None,
+                  use_otsu=False, strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)),
                   rho_mean=0, rho_cov=0,
                   tracking_ll_threshold=-100, tracking_model_segment=True,
                   tracking_init_mean=None, tracking_init_cov=None,
@@ -38,7 +39,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   centroid_hampel_span=5, centroid_hampel_sig=3,
                   angle_hampel_span=5, angle_hampel_sig=3,
                   model_smoothing_clips=(-300, -150), tracking_model_init='raw',
-                  compute_raw_scalars=False, use_otsu=False,
+                  compute_raw_scalars=False,
                   **kwargs):
     '''
     This function looks for a mouse in background-subtracted frames from a chunk of depth video.
@@ -114,7 +115,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
     
     # Apply otsu
     if use_otsu:
-        chunk = apply_otsu(chunk,max_height)
+        chunk = apply_otsu(chunk,max_height,strel_otsu)
 
 
     # Denoise the frames before we do anything else
