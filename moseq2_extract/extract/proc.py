@@ -326,7 +326,7 @@ def apply_roi(frames, roi):
     cropped_frames = cropped_frames[:, bbox[0, 0]:bbox[1, 0], bbox[0, 1]:bbox[1, 1]]
     return cropped_frames
 
-def apply_otsu(frames, max_height, strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))):
+def apply_otsu(frames, max_height, iterations = 1, strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))):
     '''
     Apply otsu to data, consider adding some closing technique).
 
@@ -341,9 +341,9 @@ def apply_otsu(frames, max_height, strel_otsu=cv2.getStructuringElement(cv2.MORP
 
     for i, frame in enumerate(frames):
         # do otsu
-        _,th2 = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-        frames[i][th2==0]=0
-        frames[i] = cv2.dilate(frames[i], kernel=strel_otsu)
+        _,otsu_mask = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        otsu_mask = cv2.dilate(otsu_mask, kernel=strel_otsu, iterations = iterations)
+        frames[i][otsu_mask==0]=0
 
     return frames
 

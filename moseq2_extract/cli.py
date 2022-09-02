@@ -121,6 +121,7 @@ def extract_options(function):
     function = click.option('--max-height', default=120, type=int, help='Max mouse height from floor (mm)')(function)
     function = click.option('--use-otsu', default=False, type=bool, help='Use otsu to segment from noise')(function)
     function = click.option('--otsu-dilate-size', default=(5, 5), type=(int, int), help='Dilation filter size after otsu')(function)
+    function = click.option('--otsu-dilate-iters', default=1, type=int, help='Number of iterations to perform dilation on binary otsu mask')(function)
     function = click.option('--detected-true-depth', default='auto', type=str, help='Option to override automatic depth estimation during extraction. \
 This is only a debugging parameter, for cases where dilate_iterations > 1, otherwise has no effect. Either "auto" or an int value.')(function)
     function = click.option('--compute-raw-scalars', is_flag=True, help="Compute scalar values from raw cropped frames.")(function)
