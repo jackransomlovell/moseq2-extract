@@ -326,7 +326,13 @@ def apply_roi(frames, roi):
     cropped_frames = cropped_frames[:, bbox[0, 0]:bbox[1, 0], bbox[0, 1]:bbox[1, 1]]
     return cropped_frames
 
-def apply_otsu(frames, max_height, iterations = 1, strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))):
+def apply_otsu(frames,
+                max_height,
+                d = 5,
+                sigma_color = 75,
+                sigma_space = 75,
+                iterations = 1, 
+                strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))):
     '''
     Apply otsu to data, consider adding some closing technique).
 
@@ -340,14 +346,17 @@ def apply_otsu(frames, max_height, iterations = 1, strel_otsu=cv2.getStructuring
     '''
 
     for i, frame in enumerate(frames):
+        # do bilateral filtering
+        bifilt = cv2.bilateralFilter(frame.astype('float32'), d, sigma_color, sigma_space, cv2.BORDER_DEFAULT)
         # do otsu
-        _,otsu_mask = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        _,otsu_mask = cv2.threshold(bifilt.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         otsu_mask = cv2.dilate(otsu_mask, kernel=strel_otsu, iterations = iterations)
         # do reconstruction
         seed = np.copy(otsu_mask)
         seed[1:-1, 1:-1] = otsu_mask.max()
         mask = otsu_mask
         filled = skimage.morphology.reconstruction(seed, mask, method='erosion')
+        # assign
         frame[filled==0]=0
 
     return frames
