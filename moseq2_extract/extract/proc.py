@@ -343,14 +343,12 @@ def apply_otsu(frames, max_height, iterations = 1, strel_otsu=cv2.getStructuring
         # do otsu
         _,otsu_mask = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         otsu_mask = cv2.dilate(otsu_mask, kernel=strel_otsu, iterations = iterations)
-        frame[otsu_mask==0]=0
         # do reconstruction
-        seed = np.copy(frame)
-        seed[1:-1, 1:-1] = frame.max()
-        mask = frame
+        seed = np.copy(otsu_mask)
+        seed[1:-1, 1:-1] = otsu_mask.max()
+        mask = otsu_mask
         filled = skimage.morphology.reconstruction(seed, mask, method='erosion')
-        #assign
-        frames[i] = filled
+        frame[filled==0]=0
 
     return frames
 
