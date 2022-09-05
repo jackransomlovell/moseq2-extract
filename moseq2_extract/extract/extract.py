@@ -28,8 +28,9 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   min_height=10, max_height=100,
                   mask_threshold=-20, use_cc=False,
                   bground=None, roi=None,
-                  use_otsu=False, strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), otsu_dilate_iters = 1,
-                  bilat_d = 5, bilat_sigma_color = 75, bilat_sigma_space = 75,
+                  use_otsu=False,
+                  strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4,4)),otsu_dilate_iters = 1,
+                  use_bilat = False, bilat_d = 5, bilat_sigma_color = 75, bilat_sigma_space = 75, gc_iters = 5,
                   rho_mean=0, rho_cov=0,
                   tracking_ll_threshold=-100, tracking_model_segment=True,
                   tracking_init_mean=None, tracking_init_cov=None,
@@ -118,11 +119,13 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
     if use_otsu:
         chunk = apply_otsu(chunk,
                             max_height,
+                            use_bilat,
                             bilat_d,
                             bilat_sigma_color,
                             bilat_sigma_space,
                             otsu_dilate_iters,
-                            strel_otsu)
+                            strel_otsu,
+                            gc_iters)
 
 
     # Denoise the frames before we do anything else

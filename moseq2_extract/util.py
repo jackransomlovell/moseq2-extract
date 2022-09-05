@@ -452,7 +452,8 @@ def get_strels(config_data):
         'strel_dilate': select_strel(config_data['bg_roi_shape'], tuple(config_data['bg_roi_dilate'])),
         'strel_erode': select_strel(config_data['bg_roi_shape'], tuple(config_data['bg_roi_erode'])),
         'strel_tail': select_strel(config_data['tail_filter_shape'], tuple(config_data['tail_filter_size'])),
-        'strel_min': select_strel(config_data['cable_filter_shape'], tuple(config_data['cable_filter_size']))
+        'strel_min': select_strel(config_data['cable_filter_shape'], tuple(config_data['cable_filter_size'])),
+        'strel_otsu-dilate': select_strel(config_data['otsu_dilate_shape'], tuple(config_data['otsu_dilate_size']))
     }
 
     return str_els

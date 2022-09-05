@@ -328,11 +328,13 @@ def apply_roi(frames, roi):
 
 def apply_otsu(frames,
                 max_height,
+                use_bilat=False,
                 d = 5,
                 sigma_color = 75,
                 sigma_space = 75,
-                iterations = 1, 
-                strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))):
+                dialte_iters = 1, 
+                strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4, 4)),
+                gc_iters = 5):
     '''
     Apply otsu to data, consider adding some closing technique).
 
@@ -345,19 +347,37 @@ def apply_otsu(frames,
     otsu_frames (3d np.ndarray): Frames with otsu performed.
     '''
 
-    for i, frame in enumerate(frames):
-        # do bilateral filtering
-        bifilt = cv2.bilateralFilter(frame.astype('float32'), d, sigma_color, sigma_space, cv2.BORDER_DEFAULT)
+    for frame in frames:
+        if use_bilat:
+            # do bilateral filtering
+            frame = cv2.bilateralFilter(frame.astype('float32'), d, sigma_color, sigma_space, cv2.BORDER_DEFAULT)
+        
         # do otsu
-        _,otsu_mask = cv2.threshold(bifilt.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-        otsu_mask = cv2.dilate(otsu_mask, kernel=strel_otsu, iterations = iterations)
-        # do reconstruction
-        seed = np.copy(otsu_mask)
-        seed[1:-1, 1:-1] = otsu_mask.max()
-        mask = otsu_mask
-        filled = skimage.morphology.reconstruction(seed, mask, method='erosion')
-        # assign
-        frame[filled==0]=0
+        thrsh,_ = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        otsu_mask = frame>thrsh
+
+        # dilate mask
+        dilate = cv2.dilate(otsu_mask.astype('uint8'), kernel=strel_otsu, iterations=dialte_iters)
+
+        # stack depth imgs for RGB and roll to get proper channel shape
+        img_src = np.asarray([frame,frame,frame])
+        img_src = np.rollaxis(img_src,0,3)
+
+        # define mask for grab cut
+        otsu_mask[otsu_mask > 0] = cv2.GC_FGD
+        otsu_mask[dilate-otsu_mask>0] = cv2.GC_PR_FGD
+
+        # define arrays for models
+        bgdModel = np.zeros((1,65),np.float64)
+        fgdModel = np.zeros((1,65),np.float64)
+
+        # compute mask with grab cut
+        gc_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),otsu_mask,\
+                    None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
+
+        
+        indx_mask = np.where((gc_mask==1)|(gc_mask==3),1,0)
+        frame[indx_mask==0] = 0
 
     return frames
 
