@@ -372,7 +372,7 @@ def apply_otsu(frames,
         fgdModel = np.zeros((1,65),np.float64)
 
         # compute mask with grab cut
-        gc_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),otsu_mask,\
+        gc_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),otsu_mask.astype('uint8'),\
                     None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
 
         
