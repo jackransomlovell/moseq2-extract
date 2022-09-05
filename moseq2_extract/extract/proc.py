@@ -363,7 +363,7 @@ def apply_otsu(frames,
         img_src = np.asarray([frame,frame,frame])
         img_src = np.rollaxis(img_src,0,3)
 
-        # define mask for grab cut
+        # define mask for grab cut\
         otsu_mask[otsu_mask > 0] = cv2.GC_FGD
         otsu_mask[dilate-otsu_mask>0] = cv2.GC_PR_FGD
 
@@ -372,13 +372,14 @@ def apply_otsu(frames,
         fgdModel = np.zeros((1,65),np.float64)
 
         # compute mask with grab cut
-        gc_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),otsu_mask.astype('uint8'),\
+        final_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),otsu_mask.astype('uint8'),\
                     None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
 
         
-        indx_mask = np.where((gc_mask==1)|(gc_mask==3),1,0)
+        indx_mask = np.where((final_mask==1)|(final_mask==3),1,0)
         frame[indx_mask==0] = 0
 
+    
     return frames
 
 
