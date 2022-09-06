@@ -347,7 +347,9 @@ def apply_otsu(frames,
     otsu_frames (3d np.ndarray): Frames with otsu performed.
     '''
 
-    for frame in frames:
+    result = np.zeros_like(frames)
+
+    for i,frame in enumerate(frames):
         if use_bilat:
             # do bilateral filtering
             frame = cv2.bilateralFilter(frame.astype('float32'), d, sigma_color, sigma_space, cv2.BORDER_DEFAULT)
@@ -356,31 +358,56 @@ def apply_otsu(frames,
         thrsh,_ = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         otsu_mask = frame>thrsh
 
-        # dilate mask
-        dilate = cv2.dilate(otsu_mask.astype('uint8'), kernel=strel_otsu, iterations=dialte_iters)
+        # get region props
+        labels =skimage.measure.label(otsu_mask)
+        props = skimage.measure.regionprops(labels, otsu_mask)
 
-        # stack depth imgs for RGB and roll to get proper channel shape
-        img_src = np.asarray([frame,frame,frame])
-        img_src = np.rollaxis(img_src,0,3)
+        if len(props) > 1:
+            #get region with largest area
+            areas = []
+            for prop in props:
+                areas.append(prop.area)
+            label_ind = np.argmax(areas)
+            #get label and draw contours
+            label = props[label_ind].label
+            contour = skimage.measure.find_contours(labels == label, 0)[0]
+            # create empty mask
+            r_mask = np.zeros_like(otsu_mask, dtype='bool')
+            # draw contour
+            r_mask[np.round(contour[:, 0]).astype('int'), np.round(contour[:, 1]).astype('int')] = 1
+            # fill contour
+            r_mask = scipy.ndimage.binary_fill_holes(r_mask)
+            frame[r_mask==0] = 0
 
-        # define mask for grab cut\
-        otsu_mask[otsu_mask > 0] = cv2.GC_FGD
-        otsu_mask[dilate-otsu_mask>0] = cv2.GC_PR_FGD
+        else:
+            # dilate mask
+            dilate = cv2.dilate(otsu_mask.astype('uint8'), kernel=strel_otsu, iterations=dialte_iters)
 
-        # define arrays for models
-        bgdModel = np.zeros((1,65),np.float64)
-        fgdModel = np.zeros((1,65),np.float64)
+            # stack depth imgs for RGB and roll to get proper channel shape
+            img_src = np.asarray([frame,frame,frame])
+            img_src = np.rollaxis(img_src,0,3)
 
-        # compute mask with grab cut
-        final_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),otsu_mask.astype('uint8'),\
-                    None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
 
-        
-        indx_mask = np.where((final_mask==1)|(final_mask==3),1,0)
-        frame[indx_mask==0] = 0
+            # define mask for grab cut
+            gc_mask = otsu_mask.copy().astype('uint8')
+            gc_mask[gc_mask > 0] = cv2.GC_FGD
+            gc_mask[dilate-otsu_mask>0] = cv2.GC_PR_FGD
 
+            # define arrays for models
+            bgdModel = np.zeros((1,65),np.float64)
+            fgdModel = np.zeros((1,65),np.float64)
+
+            # compute mask with grab cut
+            final_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),gc_mask,\
+                None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
+
+
+            indx_mask = np.where((final_mask==1)|(final_mask==3),1,0)
+            frame[indx_mask==0] = 0
+
+        result[i] = frame
     
-    return frames
+    return result
 
 
 def im_moment_features(IM):
