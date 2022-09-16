@@ -127,6 +127,8 @@ def extract_options(function):
     function = click.option('--bilat-d', default=5, type=int, help='Filter size for bilateral filter in otsu step')(function)
     function = click.option('--bilat-sigma-color', default=75, type=int, help='Color sigma for bilateral filter in otsu step')(function)
     function = click.option('--bilat-sigma-space', default=75, type=int, help='Space sigma for bilateral filter in otsu step')(function)
+    function = click.option('--gaus-kernel', default=(5, 5), type=tuple, help='Kernel size for gaussian filtering step in otsu')(function)
+    function = click.option('--gaus-sigma', default=0, type=int, help='Sigma for gaussian filtering step in otsu')(function)
     function = click.option('--grabCut-iters', default=5, type=int, help='Iterations for grab cut algorithm')(function)
     function = click.option('--detected-true-depth', default='auto', type=str, help='Option to override automatic depth estimation during extraction. \
 This is only a debugging parameter, for cases where dilate_iterations > 1, otherwise has no effect. Either "auto" or an int value.')(function)

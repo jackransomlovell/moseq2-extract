@@ -332,6 +332,8 @@ def apply_otsu(frames,
                 d = 5,
                 sigma_color = 75,
                 sigma_space = 75,
+                gaus_kernel = (5,5),
+                gaus_sigma = 0,
                 dialte_iters = 1, 
                 strel_otsu=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4, 4)),
                 gc_iters = 5):
@@ -358,53 +360,45 @@ def apply_otsu(frames,
         thrsh,_ = cv2.threshold(frame.astype('uint8'),0, max_height,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         otsu_mask = frame>thrsh
 
-        # get region props
-        labels =skimage.measure.label(otsu_mask)
-        props = skimage.measure.regionprops(labels, otsu_mask)
+        # dilate mask
+        dilate = cv2.dilate(otsu_mask.astype('uint8'), kernel=strel_otsu, iterations=dialte_iters)
 
-        if len(props) > 1:
-            #get region with largest area
-            areas = []
-            for prop in props:
-                areas.append(prop.area)
-            label_ind = np.argmax(areas)
-            #get label and draw contours
-            label = props[label_ind].label
-            contour = skimage.measure.find_contours(labels == label, 0)[0]
-            # create empty mask
-            r_mask = np.zeros_like(otsu_mask, dtype='bool')
-            # draw contour
-            r_mask[np.round(contour[:, 0]).astype('int'), np.round(contour[:, 1]).astype('int')] = 1
-            # fill contour
-            r_mask = scipy.ndimage.binary_fill_holes(r_mask)
-            frame[r_mask==0] = 0
+        # stack depth imgs after gaussian blur for RGB and roll to get proper channel shape
+        blur = cv2.GaussianBlur(src=frame.astype('uint8'),ksize=tuple(gaus_kernel),sigmaX=gaus_sigma)
+        img_src = np.asarray([blur,blur,blur])
+        img_src = np.rollaxis(img_src,0,3)
 
+        # define mask for grab cut
+        hyp_mask = otsu_mask.copy().astype('uint8')
+        hyp_mask[otsu_mask > 0] = cv2.GC_FGD
+        hyp_mask[dilate-otsu_mask>0] = cv2.GC_PR_FGD
+
+        # define arrays for models
+        bgdModel = np.zeros((1,65),np.float64)
+        fgdModel = np.zeros((1,65),np.float64)
+
+        # compute mask with grab cut
+        gc_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),hyp_mask,\
+            None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
+        # get pixels that are definite and probably foreground
+        total_mask = np.where((gc_mask==1)|(gc_mask==3),1,0)
+
+        # get contours 
+        contours, _ = cv2.findContours(total_mask.astype('uint8'), \
+            cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+        # bool to mask any blobs still left
+        drawing = np.zeros_like(frame)
+        if len(contours) > 1:
+            areas=[]
+            for cnt in contours:
+                areas.append(cv2.contourArea(cnt))
+            max_ind = np.argmax(areas)
+            indx_mask = cv2.drawContours(drawing, [contours[max_ind]], -1, (255,0,0), -1)
         else:
-            # dilate mask
-            dilate = cv2.dilate(otsu_mask.astype('uint8'), kernel=strel_otsu, iterations=dialte_iters)
+            indx_mask = cv2.drawContours(drawing, contours, -1, (255,0,0), -1)
 
-            # stack depth imgs for RGB and roll to get proper channel shape
-            img_src = np.asarray([frame,frame,frame])
-            img_src = np.rollaxis(img_src,0,3)
-
-
-            # define mask for grab cut
-            gc_mask = otsu_mask.copy().astype('uint8')
-            gc_mask[gc_mask > 0] = cv2.GC_FGD
-            gc_mask[dilate-otsu_mask>0] = cv2.GC_PR_FGD
-
-            # define arrays for models
-            bgdModel = np.zeros((1,65),np.float64)
-            fgdModel = np.zeros((1,65),np.float64)
-
-            # compute mask with grab cut
-            final_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),gc_mask,\
-                None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
-
-
-            indx_mask = np.where((final_mask==1)|(final_mask==3),1,0)
-            frame[indx_mask==0] = 0
-
+        frame[indx_mask==0] = 0
         result[i] = frame
     
     return result
