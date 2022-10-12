@@ -349,9 +349,7 @@ def apply_otsu(frames,
     otsu_frames (3d np.ndarray): Frames with otsu performed.
     '''
 
-    result = np.zeros_like(frames)
-
-    for i,frame in enumerate(frames):
+    for frame in frames:
         if use_bilat:
             # do bilateral filtering
             frame = cv2.bilateralFilter(frame.astype('float32'), d, sigma_color, sigma_space, cv2.BORDER_DEFAULT)
@@ -381,10 +379,10 @@ def apply_otsu(frames,
         gc_mask, _, _ = cv2.grabCut(img_src.astype('uint8'),hyp_mask,\
             None,bgdModel,fgdModel,gc_iters,cv2.GC_INIT_WITH_MASK)
         # get pixels that are definite and probably foreground
-        total_mask = np.where((gc_mask==1)|(gc_mask==3),1,0)
+        gc_mask = np.where((gc_mask==1)|(gc_mask==3),1,0)
 
         # get contours 
-        contours, _ = cv2.findContours(total_mask.astype('uint8'), \
+        contours, _ = cv2.findContours(gc_mask.astype('uint8'), \
             cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         # bool to mask any blobs still left
@@ -394,14 +392,13 @@ def apply_otsu(frames,
             for cnt in contours:
                 areas.append(cv2.contourArea(cnt))
             max_ind = np.argmax(areas)
-            indx_mask = cv2.drawContours(drawing, [contours[max_ind]], -1, (255,0,0), -1)
+            drawing = cv2.drawContours(drawing, [contours[max_ind]], -1, (255,0,0), -1)
         else:
-            indx_mask = cv2.drawContours(drawing, contours, -1, (255,0,0), -1)
+            drawing = cv2.drawContours(drawing, contours, -1, (255,0,0), -1)
 
-        frame[indx_mask==0] = 0
-        result[i] = frame
+        frame[drawing==0] = 0
     
-    return result
+    return frames
 
 
 def im_moment_features(IM):
