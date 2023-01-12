@@ -1,0 +1,656 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BUILDDIR	docs/Makefile	/^BUILDDIR      = _build$/;"	m
+BUILDDIR	docs/make.bat	/^set BUILDDIR=_build$/;"	v
+CLITests	tests/integration_tests/test_cli.py	/^class CLITests(TestCase):$/;"	c
+CliRunner	tests/integration_tests/test_cli.py	/^from click.testing import CliRunner$/;"	i
+GUITests	tests/integration_tests/test_gui.py	/^class GUITests(TestCase):$/;"	c
+Pattern	moseq2_extract/util.py	/^from typing import Pattern$/;"	i
+SOURCEDIR	docs/Makefile	/^SOURCEDIR     = .$/;"	m
+SOURCEDIR	docs/make.bat	/^set SOURCEDIR=.$/;"	v
+SPHINXBUILD	docs/Makefile	/^SPHINXBUILD   ?= sphinx-build$/;"	m
+SPHINXBUILD	docs/make.bat	/^	set SPHINXBUILD=sphinx-build$/;"	v
+SPHINXOPTS	docs/Makefile	/^SPHINXOPTS    ?=$/;"	m
+TestCase	tests/integration_tests/test_cli.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/integration_tests/test_gui.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_extract_proc.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_extract_roi.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_extract_track.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_helper_data.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_helper_extract.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_io_image.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_io_video.py	/^from unittest import TestCase$/;"	i
+TestCase	tests/unit_tests/test_util.py	/^from unittest import TestCase$/;"	i
+TestEMTracking	tests/unit_tests/test_extract_track.py	/^class TestEMTracking(TestCase):$/;"	c
+TestExtractProc	tests/unit_tests/test_extract_proc.py	/^class TestExtractProc(TestCase):$/;"	c
+TestExtractROI	tests/unit_tests/test_extract_roi.py	/^class TestExtractROI(TestCase):$/;"	c
+TestExtractUtils	tests/unit_tests/test_util.py	/^class TestExtractUtils(TestCase):$/;"	c
+TestHelperData	tests/unit_tests/test_helper_data.py	/^class TestHelperData(TestCase):$/;"	c
+TestHelperExtract	tests/unit_tests/test_helper_extract.py	/^class TestHelperExtract(TestCase):$/;"	c
+TestImageIO	tests/unit_tests/test_io_image.py	/^class TestImageIO(TestCase):$/;"	c
+TestVideoIO	tests/unit_tests/test_io_video.py	/^class TestVideoIO(TestCase):$/;"	c
+__version__	moseq2_extract/__init__.py	/^__version__ = "v1.1.2"$/;"	v
+_load_h5_to_dict	moseq2_extract/util.py	/^def _load_h5_to_dict(file: h5py.File, path) -> dict:$/;"	f
+_underscorer2	moseq2_extract/util.py	/^_underscorer2 = re.compile('([a-z0-9])([A-Z])')$/;"	v
+abspath	moseq2_extract/helpers/extract.py	/^from os.path import exists, basename, dirname, join, abspath$/;"	i
+abspath	moseq2_extract/helpers/wrappers.py	/^from os.path import join, exists, dirname, basename, abspath, splitext$/;"	i
+abspath	moseq2_extract/util.py	/^from os.path import join, exists, splitext, basename, abspath, dirname$/;"	i
+aggregate_extract_results	moseq2_extract/cli.py	/^def aggregate_extract_results(input_dir, format, output_dir, mouse_threshold):$/;"	f
+aggregate_extract_results	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+aggregate_extract_results_command	moseq2_extract/gui.py	/^def aggregate_extract_results_command(input_dir, format, output_dir, mouse_threshold=0.0):$/;"	f
+aggregate_extract_results_command	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+aggregate_extract_results_wrapper	moseq2_extract/gui.py	/^                                            generate_index_wrapper, aggregate_extract_results_wrapper$/;"	i
+aggregate_extract_results_wrapper	moseq2_extract/helpers/wrappers.py	/^def aggregate_extract_results_wrapper(input_dir, format, output_dir, mouse_threshold=0.0):$/;"	f
+apply_otsu	moseq2_extract/extract/proc.py	/^def apply_otsu(frames,$/;"	f
+apply_roi	moseq2_extract/extract/proc.py	/^def apply_roi(frames, roi):$/;"	f
+apply_warning_filters	moseq2_extract/util.py	/^    def apply_warning_filters(*args, **kwargs):$/;"	f	function:filter_warnings
+ast	moseq2_extract/io/image.py	/^import ast$/;"	i
+author	docs/conf.py	/^author = 'Datta Lab'$/;"	v
+author	setup.py	/^    author='Datta Lab',$/;"	v
+autodoc_default_flags	docs/conf.py	/^autodoc_default_flags = [$/;"	v
+autosummary_generate	docs/conf.py	/^autosummary_generate = True  # Make _autosummary files and include them$/;"	v
+basename	moseq2_extract/gui.py	/^from os.path import dirname, basename, exists, join$/;"	i
+basename	moseq2_extract/helpers/data.py	/^from os.path import exists, join, dirname, basename, splitext$/;"	i
+basename	moseq2_extract/helpers/extract.py	/^from os.path import exists, basename, dirname, join, abspath$/;"	i
+basename	moseq2_extract/helpers/wrappers.py	/^from os.path import join, exists, dirname, basename, abspath, splitext$/;"	i
+basename	moseq2_extract/util.py	/^from os.path import join, exists, splitext, basename, abspath, dirname$/;"	i
+batch_extract	moseq2_extract/cli.py	/^def batch_extract(input_folder, output_dir, skip_completed, num_frames, extensions,$/;"	f
+batch_extract	moseq2_extract/gui.py	/^from moseq2_extract.cli import batch_extract$/;"	i
+build_index_dict	moseq2_extract/helpers/data.py	/^def build_index_dict(files_to_use):$/;"	f
+build_index_dict	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+build_index_dict	tests/unit_tests/test_helper_data.py	/^                build_manifest, copy_manifest_results, handle_extract_metadata, build_index_dict$/;"	i
+build_manifest	moseq2_extract/helpers/data.py	/^def build_manifest(loaded, format, snake_case=True):$/;"	f
+build_manifest	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+build_manifest	tests/unit_tests/test_helper_data.py	/^                build_manifest, copy_manifest_results, handle_extract_metadata, build_index_dict$/;"	i
+build_path	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+build_path	moseq2_extract/util.py	/^def build_path(keys: dict, format_string: str, snake_case=True) -> str:$/;"	f
+build_path	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+camel_to_snake	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+camel_to_snake	moseq2_extract/util.py	/^def camel_to_snake(s):$/;"	f
+check_completion_status	moseq2_extract/helpers/data.py	/^def check_completion_status(status_filename):$/;"	f
+check_completion_status	moseq2_extract/helpers/extract.py	/^from moseq2_extract.helpers.data import check_completion_status$/;"	i
+check_completion_status	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+check_completion_status	moseq2_extract/util.py	/^    from moseq2_extract.helpers.data import check_completion_status$/;"	i
+check_completion_status	tests/unit_tests/test_helper_data.py	/^                build_manifest, copy_manifest_results, handle_extract_metadata, build_index_dict$/;"	i
+check_filter_sizes	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+check_filter_sizes	moseq2_extract/util.py	/^def check_filter_sizes(config_data):$/;"	f
+clean_dict	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+clean_dict	moseq2_extract/util.py	/^def clean_dict(dct):$/;"	f
+clean_entry	moseq2_extract/util.py	/^    def clean_entry(e):$/;"	f	function:clean_dict
+clean_file_str	moseq2_extract/util.py	/^def clean_file_str(file_str: str, replace_with: str = '-') -> str:$/;"	f
+clean_file_str	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+clean_frames	moseq2_extract/extract/proc.py	/^def clean_frames(frames, max_height=100, prefilter_space=(3,), prefilter_time=None,$/;"	f
+clean_frames	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+cli	moseq2_extract/cli.py	/^def cli():$/;"	f
+click	moseq2_extract/cli.py	/^import click$/;"	i
+click	moseq2_extract/util.py	/^import click$/;"	i
+click	tests/integration_tests/test_cli.py	/^import click$/;"	i
+click_param_annot	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+click_param_annot	moseq2_extract/util.py	/^def click_param_annot(click_cmd):$/;"	f
+click_param_annot	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+codecs	setup.py	/^import codecs$/;"	i
+command_with_config	moseq2_extract/cli.py	/^from moseq2_extract.util import command_with_config, read_yaml, recursive_find_unextracted_dirs$/;"	i
+command_with_config	moseq2_extract/util.py	/^def command_with_config(config_file_param_name):$/;"	f
+command_with_config	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+common_avi_options	moseq2_extract/cli.py	/^def common_avi_options(function):$/;"	f
+common_roi_options	moseq2_extract/cli.py	/^def common_roi_options(function):$/;"	f
+compute_scalars	moseq2_extract/extract/proc.py	/^def compute_scalars(frames, track_features, min_height=10, max_height=100, true_depth=673.1):$/;"	f
+compute_scalars	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+convert_pxs_to_mm	moseq2_extract/extract/proc.py	/^from moseq2_extract.util import convert_pxs_to_mm, strided_app$/;"	i
+convert_pxs_to_mm	moseq2_extract/util.py	/^def convert_pxs_to_mm(coords, resolution=(512, 424), field_of_view=(70.6, 60), true_depth=673.1):$/;"	f
+convert_raw_to_avi	moseq2_extract/cli.py	/^def convert_raw_to_avi(input_file, output_file, chunk_size, fps, delete, threads, mapping):$/;"	f
+convert_raw_to_avi	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+convert_raw_to_avi_function	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+convert_raw_to_avi_function	moseq2_extract/util.py	/^def convert_raw_to_avi_function(input_file, chunk_size=2000, fps=30, delete=False, threads=3):$/;"	f
+convert_raw_to_avi_function	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+convert_raw_to_avi_wrapper	moseq2_extract/helpers/wrappers.py	/^def convert_raw_to_avi_wrapper(input_file, output_file, chunk_size, fps, delete, threads, mapping):$/;"	f
+copy_h5_metadata_to_yaml_wrapper	moseq2_extract/helpers/wrappers.py	/^def copy_h5_metadata_to_yaml_wrapper(input_dir, h5_metadata_path):$/;"	f
+copy_h5_metadata_to_yaml_wrapper	tests/integration_tests/test_gui.py	/^from moseq2_extract.helpers.wrappers import copy_h5_metadata_to_yaml_wrapper$/;"	i
+copy_manifest_results	moseq2_extract/helpers/data.py	/^def copy_manifest_results(manifest, output_dir):$/;"	f
+copy_manifest_results	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+copy_manifest_results	tests/unit_tests/test_helper_data.py	/^                build_manifest, copy_manifest_results, handle_extract_metadata, build_index_dict$/;"	i
+copy_slice	moseq2_extract/cli.py	/^def copy_slice(input_file, output_file, copy_slice, chunk_size, fps, delete, threads, mapping):$/;"	f
+copy_slice	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+copy_slice_wrapper	moseq2_extract/helpers/wrappers.py	/^def copy_slice_wrapper(input_file, output_file, copy_slice, chunk_size, fps, delete, threads, mapping):$/;"	f
+create_extract_h5	moseq2_extract/helpers/data.py	/^def create_extract_h5(h5_file, acquisition_metadata, config_data, status_dict, scalars_attrs,$/;"	f
+create_extract_h5	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+create_extract_h5	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.helpers.data import create_extract_h5$/;"	i
+crop_and_rotate_frames	moseq2_extract/extract/extract.py	/^from moseq2_extract.extract.proc import (crop_and_rotate_frames, threshold_chunk,$/;"	i
+crop_and_rotate_frames	moseq2_extract/extract/proc.py	/^def crop_and_rotate_frames(frames, features, crop_size=(80, 80), progress_bar=False):$/;"	f
+crop_and_rotate_frames	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+custom_command_class	moseq2_extract/util.py	/^    class custom_command_class(click.Command):$/;"	c	function:command_with_config
+cv2	moseq2_extract/extract/extract.py	/^import cv2$/;"	i
+cv2	moseq2_extract/extract/proc.py	/^import cv2$/;"	i
+cv2	moseq2_extract/extract/track.py	/^import cv2$/;"	i
+cv2	moseq2_extract/io/video.py	/^import cv2$/;"	i
+cv2	moseq2_extract/util.py	/^import cv2$/;"	i
+cv2	setup.py	/^    import cv2$/;"	i
+cv2	tests/integration_tests/test_cli.py	/^import cv2$/;"	i
+cv2	tests/unit_tests/test_extract_proc.py	/^import cv2$/;"	i
+cv2	tests/unit_tests/test_helper_extract.py	/^import cv2$/;"	i
+cv2	tests/unit_tests/test_util.py	/^import cv2$/;"	i
+cython	setup.py	/^    import cython$/;"	i
+datetime	moseq2_extract/io/video.py	/^import datetime$/;"	i
+deepcopy	moseq2_extract/cli.py	/^from copy import deepcopy$/;"	i
+deepcopy	moseq2_extract/extract/extract.py	/^from copy import deepcopy$/;"	i
+deepcopy	moseq2_extract/extract/proc.py	/^from copy import deepcopy$/;"	i
+deepcopy	moseq2_extract/helpers/wrappers.py	/^from copy import deepcopy$/;"	i
+deepcopy	moseq2_extract/util.py	/^from copy import deepcopy$/;"	i
+deepcopy	tests/integration_tests/test_gui.py	/^from copy import deepcopy$/;"	i
+deepcopy	tests/unit_tests/test_helper_extract.py	/^from copy import deepcopy$/;"	i
+default	moseq2_extract/cli.py	/^              default=os.getcwd(), help="Output directory for downloaded flip flie")$/;"	v
+description	setup.py	/^    description='To boldly go where no mouse has gone before',$/;"	v
+detect_and_set_camera_parameters	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+detect_and_set_camera_parameters	moseq2_extract/util.py	/^def detect_and_set_camera_parameters(config_data, input_file=None):$/;"	f
+detect_and_set_camera_parameters	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+detect_avi_file	moseq2_extract/util.py	/^def detect_avi_file(finfo):$/;"	f
+dict_to_h5	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+dict_to_h5	moseq2_extract/util.py	/^def dict_to_h5(h5, dic, root='\/', annotations=None):$/;"	f
+dict_to_h5	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+dirname	moseq2_extract/extract/proc.py	/^from os.path import exists, join, dirname$/;"	i
+dirname	moseq2_extract/gui.py	/^from os.path import dirname, basename, exists, join$/;"	i
+dirname	moseq2_extract/helpers/data.py	/^from os.path import exists, join, dirname, basename, splitext$/;"	i
+dirname	moseq2_extract/helpers/extract.py	/^from os.path import exists, basename, dirname, join, abspath$/;"	i
+dirname	moseq2_extract/helpers/wrappers.py	/^from os.path import join, exists, dirname, basename, abspath, splitext$/;"	i
+dirname	moseq2_extract/io/image.py	/^from os.path import join, dirname, exists$/;"	i
+dirname	moseq2_extract/util.py	/^from os.path import join, exists, splitext, basename, abspath, dirname$/;"	i
+dirname	tests/unit_tests/test_util.py	/^from os.path import exists, dirname$/;"	i
+download_flip_command	moseq2_extract/gui.py	/^def download_flip_command(output_dir, config_file="", selection=1):$/;"	f
+download_flip_command	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+download_flip_command	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.gui import generate_config_command, download_flip_command$/;"	i
+download_flip_file	moseq2_extract/cli.py	/^def download_flip_file(config_file, output_dir):$/;"	f
+download_flip_file	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+em_get_ll	moseq2_extract/extract/extract.py	/^from moseq2_extract.extract.track import em_tracking, em_get_ll$/;"	i
+em_get_ll	moseq2_extract/extract/track.py	/^def em_get_ll(frames, mean, cov, progress_bar=False):$/;"	f
+em_get_ll	tests/unit_tests/test_extract_track.py	/^from moseq2_extract.extract.track import em_get_ll, em_tracking$/;"	i
+em_init	moseq2_extract/extract/track.py	/^def em_init(depth_frame,$/;"	f
+em_iter	moseq2_extract/extract/track.py	/^def em_iter(data, mean, cov, lamd=.1, epsilon=1e-1, max_iter=25):$/;"	f
+em_tracking	moseq2_extract/extract/extract.py	/^from moseq2_extract.extract.track import em_tracking, em_get_ll$/;"	i
+em_tracking	moseq2_extract/extract/track.py	/^def em_tracking(frames, raw_frames, segment=True, ll_threshold=-30, rho_mean=0, rho_cov=0,$/;"	f
+em_tracking	tests/unit_tests/test_extract_track.py	/^from moseq2_extract.extract.track import em_get_ll, em_tracking$/;"	i
+end	docs/make.bat	/^:end$/;"	l
+escape_path	moseq2_extract/util.py	/^def escape_path(path):$/;"	f
+exclude_patterns	docs/conf.py	/^exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']$/;"	v
+exists	moseq2_extract/extract/proc.py	/^from os.path import exists, join, dirname$/;"	i
+exists	moseq2_extract/gui.py	/^from os.path import dirname, basename, exists, join$/;"	i
+exists	moseq2_extract/helpers/data.py	/^from os.path import exists, join, dirname, basename, splitext$/;"	i
+exists	moseq2_extract/helpers/extract.py	/^from os.path import exists, basename, dirname, join, abspath$/;"	i
+exists	moseq2_extract/helpers/wrappers.py	/^from os.path import join, exists, dirname, basename, abspath, splitext$/;"	i
+exists	moseq2_extract/io/image.py	/^from os.path import join, dirname, exists$/;"	i
+exists	moseq2_extract/io/video.py	/^from os.path import exists$/;"	i
+exists	moseq2_extract/util.py	/^from os.path import join, exists, splitext, basename, abspath, dirname$/;"	i
+exists	tests/integration_tests/test_cli.py	/^from os.path import exists$/;"	i
+exists	tests/integration_tests/test_gui.py	/^from os.path import exists$/;"	i
+exists	tests/unit_tests/test_util.py	/^from os.path import exists, dirname$/;"	i
+extensions	docs/conf.py	/^    extensions = [$/;"	v
+extract	moseq2_extract/cli.py	/^def extract(input_file, output_dir, num_frames, skip_completed, **config_data):$/;"	f
+extract	moseq2_extract/extract/proc.py	/^import moseq2_extract.extract.roi$/;"	i
+extract	moseq2_extract/gui.py	/^    from .cli import extract$/;"	i
+extract	moseq2_extract/helpers/data.py	/^    from moseq2_extract.cli import extract$/;"	i
+extract	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+extract_chunk	moseq2_extract/extract/extract.py	/^def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),$/;"	f
+extract_chunk	moseq2_extract/helpers/extract.py	/^from moseq2_extract.extract.extract import extract_chunk$/;"	i
+extract_command	moseq2_extract/gui.py	/^def extract_command(input_file, output_dir, config_file, num_frames=None, skip=False):$/;"	f
+extract_command	moseq2_extract/helpers/extract.py	/^    from moseq2_extract.gui import extract_command$/;"	i
+extract_command	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+extract_found_sessions	moseq2_extract/gui.py	/^def extract_found_sessions(input_dir, config_file, ext, extract_all=True, skip_extracted=False):$/;"	f
+extract_found_sessions	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+extract_options	moseq2_extract/cli.py	/^def extract_options(function):$/;"	f
+extract_wrapper	moseq2_extract/cli.py	/^from moseq2_extract.helpers.wrappers import (get_roi_wrapper, extract_wrapper, flip_file_wrapper,$/;"	i
+extract_wrapper	moseq2_extract/gui.py	/^                                            generate_index_wrapper, aggregate_extract_results_wrapper$/;"	i
+extract_wrapper	moseq2_extract/helpers/wrappers.py	/^def extract_wrapper(input_file, output_dir, config_data, num_frames=None, skip=False):$/;"	f
+feature_hampel_filter	moseq2_extract/extract/proc.py	/^def feature_hampel_filter(features, centroid_hampel_span=None, centroid_hampel_sig=3,$/;"	f
+feature_hampel_filter	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+filter_h5	moseq2_extract/helpers/wrappers.py	/^    def filter_h5(args):$/;"	f	function:aggregate_extract_results_wrapper
+filter_warnings	moseq2_extract/gui.py	/^from moseq2_extract.util import (recursive_find_unextracted_dirs, load_found_session_paths, filter_warnings)$/;"	i
+filter_warnings	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.util import mouse_threshold_filter, filter_warnings, read_yaml$/;"	i
+filter_warnings	moseq2_extract/util.py	/^def filter_warnings(func):$/;"	f
+find_packages	setup.py	/^from setuptools import setup, find_packages$/;"	i
+find_roi	moseq2_extract/cli.py	/^def find_roi(input_file, output_dir, **config_data):$/;"	f
+find_roi	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+find_roi	tests/unit_tests/test_util.py	/^from moseq2_extract.cli import find_roi$/;"	i
+find_roi_command	moseq2_extract/gui.py	/^def find_roi_command(input_dir, config_file, exts=['dat', 'mkv', 'avi'], select_session=False, default_session=0):$/;"	f
+find_roi_command	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+flip_file_wrapper	moseq2_extract/cli.py	/^from moseq2_extract.helpers.wrappers import (get_roi_wrapper, extract_wrapper, flip_file_wrapper,$/;"	i
+flip_file_wrapper	moseq2_extract/gui.py	/^                                            generate_index_wrapper, aggregate_extract_results_wrapper$/;"	i
+flip_file_wrapper	moseq2_extract/helpers/wrappers.py	/^def flip_file_wrapper(config_file, output_dir, selected_flip=None):$/;"	f
+gen_batch_sequence	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+gen_batch_sequence	moseq2_extract/util.py	/^def gen_batch_sequence(nframes, chunk_size, overlap, offset=0):$/;"	f
+gen_batch_sequence	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.util import scalar_attributes, gen_batch_sequence, load_metadata$/;"	i
+gen_batch_sequence	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+generate_config	moseq2_extract/cli.py	/^def generate_config(output_file):$/;"	f
+generate_config	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+generate_config_command	moseq2_extract/gui.py	/^def generate_config_command(output_file):$/;"	f
+generate_config_command	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+generate_config_command	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.gui import generate_config_command, download_flip_command$/;"	i
+generate_index	moseq2_extract/cli.py	/^def generate_index(input_dir, output_file):$/;"	f
+generate_index	tests/integration_tests/test_cli.py	/^    convert_raw_to_avi, copy_slice, generate_index, aggregate_extract_results$/;"	i
+generate_index_command	moseq2_extract/gui.py	/^def generate_index_command(input_dir, output_file):$/;"	f
+generate_index_command	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+generate_index_wrapper	moseq2_extract/gui.py	/^                                            generate_index_wrapper, aggregate_extract_results_wrapper$/;"	i
+generate_index_wrapper	moseq2_extract/helpers/wrappers.py	/^def generate_index_wrapper(input_dir, output_file):$/;"	f
+generate_missing_metadata	moseq2_extract/util.py	/^def generate_missing_metadata(sess_dir, sess_name):$/;"	f
+get_bbox	moseq2_extract/extract/proc.py	/^def get_bbox(roi):$/;"	f
+get_bground_im_file	moseq2_extract/extract/proc.py	/^def get_bground_im_file(frames_file, frame_stride=500, med_scale=5, output_dir=None, **kwargs):$/;"	f
+get_bground_im_file	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.extract.proc import get_roi, get_bground_im_file$/;"	i
+get_bucket_center	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+get_bucket_center	moseq2_extract/util.py	/^def get_bucket_center(img, true_depth, threshold=650):$/;"	f
+get_bucket_center	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+get_distribution	moseq2_extract/helpers/data.py	/^from pkg_resources import get_distribution$/;"	i
+get_flips	moseq2_extract/extract/proc.py	/^def get_flips(frames, flip_file=None, smoothing=None):$/;"	f
+get_frame_features	moseq2_extract/extract/proc.py	/^def get_frame_features(frames, frame_threshold=10, mask=np.array([]),$/;"	f
+get_frame_features	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+get_frame_range_indices	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+get_frame_range_indices	moseq2_extract/util.py	/^def get_frame_range_indices(trim_beginning, trim_ending, nframes):$/;"	f
+get_largest_cc	moseq2_extract/extract/proc.py	/^def get_largest_cc(frames, progress_bar=False):$/;"	f
+get_largest_cc	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+get_movie_info	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.io.video import load_movie_data, get_movie_info, write_frames$/;"	i
+get_movie_info	moseq2_extract/io/video.py	/^def get_movie_info(filename, frame_size=(512, 424), bit_depth=16, mapping='DEPTH', threads=8, **kwargs):$/;"	f
+get_movie_info	moseq2_extract/util.py	/^from moseq2_extract.io.video import get_movie_info$/;"	i
+get_movie_info	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+get_raw_info	moseq2_extract/io/video.py	/^def get_raw_info(filename, bit_depth=16, frame_size=(512, 424)):$/;"	f
+get_raw_info	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+get_roi	moseq2_extract/extract/proc.py	/^def get_roi(depth_image,$/;"	f
+get_roi	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.extract.proc import get_roi, get_bground_im_file$/;"	i
+get_roi	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+get_roi_wrapper	moseq2_extract/cli.py	/^from moseq2_extract.helpers.wrappers import (get_roi_wrapper, extract_wrapper, flip_file_wrapper,$/;"	i
+get_roi_wrapper	moseq2_extract/gui.py	/^                                            generate_index_wrapper, aggregate_extract_results_wrapper$/;"	i
+get_roi_wrapper	moseq2_extract/helpers/wrappers.py	/^def get_roi_wrapper(input_file, config_data, output_dir=None):$/;"	f
+get_selected_sessions	moseq2_extract/gui.py	/^def get_selected_sessions(to_extract, extract_all):$/;"	f
+get_selected_sessions	tests/integration_tests/test_gui.py	/^    find_roi_command, extract_command, extract_found_sessions, get_selected_sessions$/;"	i
+get_stream_names	moseq2_extract/io/video.py	/^def get_stream_names(filename, stream_tag="title"):$/;"	f
+get_strels	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+get_strels	moseq2_extract/util.py	/^def get_strels(config_data):$/;"	f
+get_strels	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+get_version	setup.py	/^def get_version(rel_path):$/;"	f
+get_video_info	moseq2_extract/io/video.py	/^def get_video_info(filename, mapping='DEPTH', threads=8, count_frames=False, **kwargs):$/;"	f
+get_video_info	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+glob	moseq2_extract/util.py	/^from glob import glob$/;"	i
+glob	tests/integration_tests/test_cli.py	/^import glob$/;"	i
+glob	tests/unit_tests/test_extract_proc.py	/^import glob$/;"	i
+graduate_dilated_wall_area	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+graduate_dilated_wall_area	moseq2_extract/util.py	/^def graduate_dilated_wall_area(bground_im, config_data, strel_dilate, output_dir):$/;"	f
+graduate_dilated_wall_area	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+h5_to_dict	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+h5_to_dict	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+h5_to_dict	moseq2_extract/util.py	/^def h5_to_dict(h5file, path) -> dict:$/;"	f
+h5_to_dict	tests/unit_tests/test_util.py	/^        def h5_to_dict(h5file, path):$/;"	f	function:TestExtractUtils.test_dict_to_h5
+h5py	moseq2_extract/helpers/data.py	/^import h5py$/;"	i
+h5py	moseq2_extract/helpers/wrappers.py	/^import h5py$/;"	i
+h5py	moseq2_extract/util.py	/^import h5py$/;"	i
+h5py	tests/integration_tests/test_gui.py	/^import h5py$/;"	i
+h5py	tests/unit_tests/test_helper_extract.py	/^import h5py$/;"	i
+h5py	tests/unit_tests/test_util.py	/^import h5py$/;"	i
+handle_extract_metadata	moseq2_extract/helpers/data.py	/^def handle_extract_metadata(input_file, dirname):$/;"	f
+handle_extract_metadata	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+handle_extract_metadata	tests/unit_tests/test_helper_data.py	/^                build_manifest, copy_manifest_results, handle_extract_metadata, build_index_dict$/;"	i
+has_frames	moseq2_extract/util.py	/^    def has_frames(f):$/;"	f	function:recursive_find_h5s
+help	docs/make.bat	/^:help$/;"	l
+html_static_path	docs/conf.py	/^html_static_path = ['_static']$/;"	v
+html_theme	docs/conf.py	/^html_theme = 'sphinx_rtd_theme'$/;"	v
+im_moment_features	moseq2_extract/extract/proc.py	/^def im_moment_features(IM):$/;"	f
+install	setup.py	/^def install(package):$/;"	f
+interpolate	moseq2_extract/extract/proc.py	/^import scipy.interpolate$/;"	i
+invoke	moseq2_extract/util.py	/^        def invoke(self, ctx):$/;"	m	class:command_with_config.custom_command_class
+io	moseq2_extract/extract/proc.py	/^import moseq2_extract.io.video$/;"	i
+joblib	moseq2_extract/extract/proc.py	/^import joblib$/;"	i
+join	moseq2_extract/extract/proc.py	/^from os.path import exists, join, dirname$/;"	i
+join	moseq2_extract/gui.py	/^from os.path import dirname, basename, exists, join$/;"	i
+join	moseq2_extract/helpers/data.py	/^from os.path import exists, join, dirname, basename, splitext$/;"	i
+join	moseq2_extract/helpers/extract.py	/^from os.path import exists, basename, dirname, join, abspath$/;"	i
+join	moseq2_extract/helpers/wrappers.py	/^from os.path import join, exists, dirname, basename, abspath, splitext$/;"	i
+join	moseq2_extract/io/image.py	/^from os.path import join, dirname, exists$/;"	i
+join	moseq2_extract/util.py	/^from os.path import join, exists, splitext, basename, abspath, dirname$/;"	i
+json	moseq2_extract/io/image.py	/^import json$/;"	i
+json	moseq2_extract/util.py	/^import json$/;"	i
+json	tests/unit_tests/test_util.py	/^import json$/;"	i
+keymap	moseq2_extract/helpers/data.py	/^from cytoolz import keymap$/;"	i
+literal_eval	moseq2_extract/gui.py	/^from ast import literal_eval$/;"	i
+load_extraction_meta_from_h5s	moseq2_extract/helpers/data.py	/^def load_extraction_meta_from_h5s(to_load, snake_case=True):$/;"	f
+load_extraction_meta_from_h5s	moseq2_extract/helpers/wrappers.py	/^                                        load_extraction_meta_from_h5s, build_manifest, copy_manifest_results, check_completion_status$/;"	i
+load_extraction_meta_from_h5s	tests/unit_tests/test_helper_data.py	/^                build_manifest, copy_manifest_results, handle_extract_metadata, build_index_dict$/;"	i
+load_found_session_paths	moseq2_extract/gui.py	/^from moseq2_extract.util import (recursive_find_unextracted_dirs, load_found_session_paths, filter_warnings)$/;"	i
+load_found_session_paths	moseq2_extract/util.py	/^def load_found_session_paths(input_dir, exts):$/;"	f
+load_metadata	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+load_metadata	moseq2_extract/util.py	/^def load_metadata(metadata_file):$/;"	f
+load_metadata	tests/unit_tests/test_helper_data.py	/^from moseq2_extract.util import load_metadata$/;"	i
+load_metadata	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.util import scalar_attributes, gen_batch_sequence, load_metadata$/;"	i
+load_metadata	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+load_movie_data	moseq2_extract/helpers/extract.py	/^from moseq2_extract.io.video import load_movie_data, write_frames_preview$/;"	i
+load_movie_data	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.io.video import load_movie_data, get_movie_info, write_frames$/;"	i
+load_movie_data	moseq2_extract/io/video.py	/^def load_movie_data(filename, frames=None, frame_size=(512, 424), bit_depth=16, **kwargs):$/;"	f
+load_movie_data	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+load_textdata	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+load_textdata	moseq2_extract/util.py	/^def load_textdata(data_file, dtype=np.float32):$/;"	f
+load_textdata	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+load_timestamps	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+load_timestamps	moseq2_extract/util.py	/^def load_timestamps(timestamp_file, col=0, alternate=False):$/;"	f
+load_timestamps	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+load_timestamps_from_movie	moseq2_extract/helpers/data.py	/^from moseq2_extract.io.video import load_timestamps_from_movie$/;"	i
+load_timestamps_from_movie	moseq2_extract/io/video.py	/^def load_timestamps_from_movie(input_file, threads=8, mapping='DEPTH'):$/;"	f
+load_timestamps_from_movie	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+make_fake_movie	tests/unit_tests/test_extract_track.py	/^def make_fake_movie():$/;"	f
+make_gradient	moseq2_extract/util.py	/^def make_gradient(width, height, h, k, a, b, theta=0):$/;"	f
+make_gradient	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+make_output_movie	moseq2_extract/helpers/extract.py	/^def make_output_movie(results, config_data, offset=0):$/;"	f
+makedirs	moseq2_extract/helpers/extract.py	/^from os import makedirs, system$/;"	i
+math	moseq2_extract/extract/proc.py	/^import math$/;"	i
+math	moseq2_extract/util.py	/^import math$/;"	i
+matplotlib	moseq2_extract/io/video.py	/^import matplotlib.pyplot as plt$/;"	i
+measure	moseq2_extract/extract/proc.py	/^import skimage.measure$/;"	i
+model_smoother	moseq2_extract/extract/proc.py	/^def model_smoother(features, ll=None, clips=(-300, -125)):$/;"	f
+model_smoother	tests/unit_tests/test_extract_proc.py	/^    get_frame_features, compute_scalars, clean_frames, get_largest_cc, feature_hampel_filter$/;"	i
+morphology	moseq2_extract/extract/proc.py	/^import skimage.morphology$/;"	i
+moseq2_extract	moseq2_extract/extract/proc.py	/^import moseq2_extract.extract.roi$/;"	i
+moseq2_extract	moseq2_extract/extract/proc.py	/^import moseq2_extract.io.video$/;"	i
+mouse_threshold_filter	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.util import mouse_threshold_filter, filter_warnings, read_yaml$/;"	i
+mouse_threshold_filter	moseq2_extract/util.py	/^def mouse_threshold_filter(h5file, thresh=0):$/;"	f
+name	setup.py	/^    name='moseq2-extract',$/;"	v
+napoleon_google_docstring	docs/conf.py	/^napoleon_google_docstring = False$/;"	v
+napoleon_use_ivar	docs/conf.py	/^napoleon_use_ivar = True$/;"	v
+napoleon_use_param	docs/conf.py	/^napoleon_use_param = False$/;"	v
+new_init	moseq2_extract/cli.py	/^def new_init(self, *args, **kwargs):$/;"	f
+np	moseq2_extract/extract/extract.py	/^import numpy as np$/;"	i
+np	moseq2_extract/extract/proc.py	/^import numpy as np$/;"	i
+np	moseq2_extract/extract/roi.py	/^import numpy as np$/;"	i
+np	moseq2_extract/extract/track.py	/^import numpy as np$/;"	i
+np	moseq2_extract/helpers/data.py	/^import numpy as np$/;"	i
+np	moseq2_extract/helpers/extract.py	/^import numpy as np$/;"	i
+np	moseq2_extract/helpers/wrappers.py	/^import numpy as np$/;"	i
+np	moseq2_extract/io/image.py	/^import numpy as np$/;"	i
+np	moseq2_extract/io/video.py	/^import numpy as np$/;"	i
+np	moseq2_extract/util.py	/^import numpy as np$/;"	i
+np	tests/integration_tests/test_cli.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_extract_proc.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_extract_roi.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_extract_track.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_helper_extract.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_io_image.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_io_video.py	/^import numpy as np$/;"	i
+np	tests/unit_tests/test_util.py	/^import numpy as np$/;"	i
+npt	tests/integration_tests/test_cli.py	/^import numpy.testing as npt$/;"	i
+npt	tests/unit_tests/test_extract_proc.py	/^import numpy.testing as npt$/;"	i
+npt	tests/unit_tests/test_extract_roi.py	/^import numpy.testing as npt$/;"	i
+npt	tests/unit_tests/test_extract_track.py	/^import numpy.testing as npt$/;"	i
+npt	tests/unit_tests/test_io_image.py	/^import numpy.testing as npt$/;"	i
+npt	tests/unit_tests/test_io_video.py	/^import numpy.testing as npt$/;"	i
+npt	tests/unit_tests/test_util.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/integration_tests/test_cli.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/unit_tests/test_extract_proc.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/unit_tests/test_extract_roi.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/unit_tests/test_extract_track.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/unit_tests/test_io_image.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/unit_tests/test_io_video.py	/^import numpy.testing as npt$/;"	i
+numpy	tests/unit_tests/test_util.py	/^import numpy.testing as npt$/;"	i
+on_rtd	docs/conf.py	/^    on_rtd = False$/;"	v
+on_rtd	docs/conf.py	/^    on_rtd = True$/;"	v
+on_rtd	docs/conf.py	/^on_rtd = input('Generating a pdf? (y\/[n])')$/;"	v
+orig_init	moseq2_extract/cli.py	/^orig_init = click.core.Option.__init__$/;"	v
+os	docs/conf.py	/^import os$/;"	i
+os	moseq2_extract/cli.py	/^import os$/;"	i
+os	moseq2_extract/gui.py	/^import os$/;"	i
+os	moseq2_extract/helpers/data.py	/^import os$/;"	i
+os	moseq2_extract/helpers/wrappers.py	/^import os$/;"	i
+os	moseq2_extract/io/image.py	/^import os$/;"	i
+os	moseq2_extract/io/video.py	/^import os$/;"	i
+os	moseq2_extract/util.py	/^import os$/;"	i
+os	setup.py	/^import os$/;"	i
+os	tests/integration_tests/test_cli.py	/^import os$/;"	i
+os	tests/integration_tests/test_gui.py	/^import os$/;"	i
+os	tests/unit_tests/test_extract_proc.py	/^import os$/;"	i
+os	tests/unit_tests/test_helper_data.py	/^import os$/;"	i
+os	tests/unit_tests/test_helper_extract.py	/^import os$/;"	i
+os	tests/unit_tests/test_io_image.py	/^import os$/;"	i
+os	tests/unit_tests/test_io_video.py	/^import os$/;"	i
+os	tests/unit_tests/test_util.py	/^import os$/;"	i
+packages	setup.py	/^    packages=find_packages(),$/;"	v
+parse_input	moseq2_extract/gui.py	/^    def parse_input(s):$/;"	f	function:get_selected_sessions
+partial	moseq2_extract/helpers/wrappers.py	/^from cytoolz import partial$/;"	i
+pdf_documents	docs/conf.py	/^pdf_documents = [('index', u'Documentation', u'MoSeq2-Extract Documentation', u'Datta Lab'),]/;"	v
+plane_equation1	tests/unit_tests/test_extract_roi.py	/^        def plane_equation1(xy):$/;"	f	function:TestExtractROI.test_plane_fit3
+plane_equation2	tests/unit_tests/test_extract_roi.py	/^        def plane_equation2(xy):$/;"	f	function:TestExtractROI.test_plane_fit3
+plane_equation_noisy	tests/unit_tests/test_extract_roi.py	/^        def plane_equation_noisy(xy, noise_scale=0):$/;"	f	function:TestExtractROI.test_plane_ransac
+plane_fit3	moseq2_extract/extract/roi.py	/^def plane_fit3(points):$/;"	f
+plane_fit3	tests/unit_tests/test_extract_roi.py	/^from moseq2_extract.extract.roi import plane_fit3, plane_ransac$/;"	i
+plane_ransac	moseq2_extract/extract/roi.py	/^def plane_ransac(depth_image, bg_roi_depth_range=(650, 750), iters=1000,$/;"	f
+plane_ransac	tests/unit_tests/test_extract_roi.py	/^from moseq2_extract.extract.roi import plane_fit3, plane_ransac$/;"	i
+platforms	setup.py	/^    platforms=['mac', 'unix'],$/;"	v
+plt	moseq2_extract/io/video.py	/^import matplotlib.pyplot as plt$/;"	i
+process_extract_batches	moseq2_extract/helpers/extract.py	/^def process_extract_batches(input_file, config_data, bground_im, roi,$/;"	f
+process_extract_batches	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.helpers.extract import process_extract_batches$/;"	i
+process_extract_batches	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.helpers.extract import run_local_extract, process_extract_batches, write_extracted_chunk_to_h5$/;"	i
+project	docs/conf.py	/^project = 'moseq2-extract'$/;"	v
+re	moseq2_extract/util.py	/^import re$/;"	i
+re	tests/unit_tests/test_extract_proc.py	/^import re$/;"	i
+read	setup.py	/^def read(rel_path):$/;"	f
+read_frames	moseq2_extract/io/video.py	/^def read_frames(filename, frames=range(0,), threads=6, fps=30, frames_is_timestamp=False,$/;"	f
+read_frames	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+read_frames_raw	moseq2_extract/io/video.py	/^def read_frames_raw(filename, frames=None, frame_size=(512, 424), bit_depth=16, movie_dtype="<u2", **kwargs):$/;"	f
+read_frames_raw	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+read_image	moseq2_extract/extract/proc.py	/^from moseq2_extract.io.image import read_image, write_image$/;"	i
+read_image	moseq2_extract/io/image.py	/^def read_image(filename, scale=True, scale_key='scale_factor'):$/;"	f
+read_image	tests/unit_tests/test_extract_proc.py	/^from moseq2_extract.io.image import read_image$/;"	i
+read_image	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.io.image import read_image$/;"	i
+read_image	tests/unit_tests/test_io_image.py	/^from moseq2_extract.io.image import write_image, read_image, read_tiff_files$/;"	i
+read_image	tests/unit_tests/test_util.py	/^from moseq2_extract.io.image import read_image$/;"	i
+read_mkv	moseq2_extract/io/video.py	/^def read_mkv(filename, frames=range(0,), pixel_format='gray16be', movie_dtype='uint16',$/;"	f
+read_mkv	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+read_tiff_files	moseq2_extract/gui.py	/^from moseq2_extract.io.image import read_tiff_files$/;"	i
+read_tiff_files	moseq2_extract/io/image.py	/^def read_tiff_files(input_dir):$/;"	f
+read_tiff_files	tests/unit_tests/test_io_image.py	/^from moseq2_extract.io.image import write_image, read_image, read_tiff_files$/;"	i
+read_yaml	moseq2_extract/cli.py	/^from moseq2_extract.util import command_with_config, read_yaml, recursive_find_unextracted_dirs$/;"	i
+read_yaml	moseq2_extract/gui.py	/^from moseq2_extract.util import read_yaml$/;"	i
+read_yaml	moseq2_extract/helpers/data.py	/^    camel_to_snake, load_textdata, build_path, dict_to_h5, click_param_annot$/;"	i
+read_yaml	moseq2_extract/helpers/extract.py	/^from moseq2_extract.util import read_yaml$/;"	i
+read_yaml	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.util import mouse_threshold_filter, filter_warnings, read_yaml$/;"	i
+read_yaml	moseq2_extract/util.py	/^def read_yaml(yaml_file):$/;"	f
+read_yaml	tests/integration_tests/test_cli.py	/^from moseq2_extract.util import read_yaml$/;"	i
+read_yaml	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+recursive_find_h5s	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+recursive_find_h5s	moseq2_extract/util.py	/^def recursive_find_h5s(root_dir=os.getcwd(),$/;"	f
+recursive_find_h5s	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+recursive_find_unextracted_dirs	moseq2_extract/cli.py	/^from moseq2_extract.util import command_with_config, read_yaml, recursive_find_unextracted_dirs$/;"	i
+recursive_find_unextracted_dirs	moseq2_extract/gui.py	/^from moseq2_extract.util import (recursive_find_unextracted_dirs, load_found_session_paths, filter_warnings)$/;"	i
+recursive_find_unextracted_dirs	moseq2_extract/util.py	/^def recursive_find_unextracted_dirs(root_dir=os.getcwd(),$/;"	f
+recursive_find_unextracted_dirs	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+request	moseq2_extract/helpers/wrappers.py	/^import urllib.request$/;"	i
+roi	moseq2_extract/extract/proc.py	/^import moseq2_extract.extract.roi$/;"	i
+ruamel	moseq2_extract/cli.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	moseq2_extract/gui.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	moseq2_extract/helpers/data.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	moseq2_extract/helpers/extract.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	moseq2_extract/helpers/wrappers.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	moseq2_extract/util.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	tests/integration_tests/test_cli.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	tests/integration_tests/test_gui.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	tests/unit_tests/test_helper_data.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	tests/unit_tests/test_helper_extract.py	/^import ruamel.yaml as yaml$/;"	i
+ruamel	tests/unit_tests/test_util.py	/^import ruamel.yaml as yaml$/;"	i
+run_local_extract	moseq2_extract/cli.py	/^from moseq2_extract.helpers.extract import run_slurm_extract, run_local_extract$/;"	i
+run_local_extract	moseq2_extract/gui.py	/^from moseq2_extract.helpers.extract import run_local_extract, run_slurm_extract$/;"	i
+run_local_extract	moseq2_extract/helpers/extract.py	/^def run_local_extract(to_extract, config_file, skip_extracted=False):$/;"	f
+run_local_extract	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.helpers.extract import run_local_extract, process_extract_batches, write_extracted_chunk_to_h5$/;"	i
+run_slurm_extract	moseq2_extract/cli.py	/^from moseq2_extract.helpers.extract import run_slurm_extract, run_local_extract$/;"	i
+run_slurm_extract	moseq2_extract/gui.py	/^from moseq2_extract.helpers.extract import run_local_extract, run_slurm_extract$/;"	i
+run_slurm_extract	moseq2_extract/helpers/extract.py	/^def run_slurm_extract(input_dir, to_extract, config_data, skip_extracted=False):$/;"	f
+scalar_attributes	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+scalar_attributes	moseq2_extract/util.py	/^def scalar_attributes():$/;"	f
+scalar_attributes	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.util import scalar_attributes, gen_batch_sequence, load_metadata$/;"	i
+scalar_attributes	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+scipy	moseq2_extract/extract/proc.py	/^import scipy.interpolate$/;"	i
+scipy	moseq2_extract/extract/proc.py	/^import scipy.signal$/;"	i
+scipy	moseq2_extract/extract/proc.py	/^import scipy.stats$/;"	i
+scipy	moseq2_extract/extract/track.py	/^import scipy.stats$/;"	i
+select_strel	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+select_strel	moseq2_extract/util.py	/^def select_strel(string='e', size=(10, 10)):$/;"	f
+select_strel	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+setUpClass	tests/integration_tests/test_gui.py	/^    def setUpClass(cls):$/;"	m	class:GUITests
+set_bground_to_plane_fit	moseq2_extract/helpers/wrappers.py	/^                        h5_to_dict, detect_and_set_camera_parameters, get_frame_range_indices, check_filter_sizes, get_strels$/;"	i
+set_bground_to_plane_fit	moseq2_extract/util.py	/^def set_bground_to_plane_fit(bground_im, plane, output_dir):$/;"	f
+set_tracking_model_parameters	moseq2_extract/helpers/extract.py	/^def set_tracking_model_parameters(results, min_height, tracking_model_ll_clip, chunk_overlap, **kwargs):$/;"	f
+setup	setup.py	/^from setuptools import setup, find_packages$/;"	i
+shutil	moseq2_extract/helpers/data.py	/^import shutil$/;"	i
+shutil	moseq2_extract/helpers/wrappers.py	/^import shutil$/;"	i
+shutil	tests/integration_tests/test_cli.py	/^import shutil$/;"	i
+shutil	tests/integration_tests/test_gui.py	/^import shutil$/;"	i
+shutil	tests/unit_tests/test_helper_data.py	/^import shutil$/;"	i
+shutil	tests/unit_tests/test_helper_extract.py	/^import shutil$/;"	i
+shutil	tests/unit_tests/test_util.py	/^import shutil$/;"	i
+signal	moseq2_extract/extract/proc.py	/^import scipy.signal$/;"	i
+skimage	moseq2_extract/extract/proc.py	/^import skimage.measure$/;"	i
+skimage	moseq2_extract/extract/proc.py	/^import skimage.morphology$/;"	i
+splitext	moseq2_extract/helpers/data.py	/^from os.path import exists, join, dirname, basename, splitext$/;"	i
+splitext	moseq2_extract/helpers/wrappers.py	/^from os.path import join, exists, dirname, basename, abspath, splitext$/;"	i
+splitext	moseq2_extract/util.py	/^from os.path import join, exists, splitext, basename, abspath, dirname$/;"	i
+stats	moseq2_extract/extract/proc.py	/^import scipy.stats$/;"	i
+stats	moseq2_extract/extract/track.py	/^import scipy.stats$/;"	i
+stats	moseq2_extract/extract/track.py	/^import statsmodels.stats.correlation_tools as stats_tools$/;"	i
+stats	tests/unit_tests/test_extract_track.py	/^import statsmodels.stats.correlation_tools as stats_tools$/;"	i
+stats_tools	moseq2_extract/extract/track.py	/^import statsmodels.stats.correlation_tools as stats_tools$/;"	i
+stats_tools	tests/unit_tests/test_extract_track.py	/^import statsmodels.stats.correlation_tools as stats_tools$/;"	i
+statsmodels	moseq2_extract/extract/track.py	/^import statsmodels.stats.correlation_tools as stats_tools$/;"	i
+statsmodels	tests/unit_tests/test_extract_track.py	/^import statsmodels.stats.correlation_tools as stats_tools$/;"	i
+strided_app	moseq2_extract/extract/proc.py	/^from moseq2_extract.util import convert_pxs_to_mm, strided_app$/;"	i
+strided_app	moseq2_extract/util.py	/^def strided_app(a, L, S):  # Window len = L, Stride len\/stepsize = S$/;"	f
+strided_app	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+subprocess	moseq2_extract/io/video.py	/^import subprocess$/;"	i
+subprocess	setup.py	/^import subprocess$/;"	i
+sys	docs/conf.py	/^import sys$/;"	i
+sys	moseq2_extract/helpers/wrappers.py	/^import sys$/;"	i
+sys	setup.py	/^import sys$/;"	i
+sys	tests/integration_tests/test_gui.py	/^import sys$/;"	i
+sys	tests/unit_tests/test_helper_data.py	/^import sys$/;"	i
+system	moseq2_extract/helpers/extract.py	/^from os import makedirs, system$/;"	i
+tarfile	moseq2_extract/extract/proc.py	/^import tarfile$/;"	i
+tarfile	moseq2_extract/helpers/data.py	/^import tarfile$/;"	i
+tarfile	moseq2_extract/io/video.py	/^import tarfile$/;"	i
+tarfile	moseq2_extract/util.py	/^import tarfile$/;"	i
+tarfile	tests/unit_tests/test_helper_data.py	/^import tarfile$/;"	i
+templates_path	docs/conf.py	/^templates_path = ['_templates']$/;"	v
+test_aggregate_extract_results	tests/integration_tests/test_cli.py	/^    def test_aggregate_extract_results(self):$/;"	m	class:CLITests
+test_aggregate_results_command	tests/integration_tests/test_gui.py	/^    def test_aggregate_results_command(self):$/;"	m	class:GUITests
+test_build_index_dict	tests/unit_tests/test_helper_data.py	/^    def test_build_index_dict(self):$/;"	m	class:TestHelperData
+test_build_manifest	tests/unit_tests/test_helper_data.py	/^    def test_build_manifest(self):$/;"	m	class:TestHelperData
+test_build_path	tests/unit_tests/test_util.py	/^    def test_build_path(self):$/;"	m	class:TestExtractUtils
+test_check_completion_status	tests/unit_tests/test_helper_data.py	/^    def test_check_completion_status(self):$/;"	m	class:TestHelperData
+test_clean_file_str	tests/unit_tests/test_util.py	/^    def test_clean_file_str(self):$/;"	m	class:TestExtractUtils
+test_clean_frames	tests/unit_tests/test_extract_proc.py	/^    def test_clean_frames(self):$/;"	m	class:TestExtractProc
+test_click_param_annot	tests/unit_tests/test_util.py	/^    def test_click_param_annot(self):$/;"	m	class:TestExtractUtils
+test_command_with_config	tests/unit_tests/test_util.py	/^    def test_command_with_config(self):$/;"	m	class:TestExtractUtils
+test_compute_scalars	tests/unit_tests/test_extract_proc.py	/^    def test_compute_scalars(self):$/;"	m	class:TestExtractProc
+test_convert_raw_to_avi	tests/integration_tests/test_cli.py	/^    def test_convert_raw_to_avi(self):$/;"	m	class:CLITests
+test_convert_raw_to_avi	tests/unit_tests/test_util.py	/^    def test_convert_raw_to_avi(self):$/;"	m	class:TestExtractUtils
+test_copy_h5_metadata_to_yaml	tests/integration_tests/test_gui.py	/^    def test_copy_h5_metadata_to_yaml(self):$/;"	m	class:GUITests
+test_copy_manifest_results	tests/unit_tests/test_helper_data.py	/^    def test_copy_manifest_results(self):$/;"	m	class:TestHelperData
+test_copy_slice	tests/integration_tests/test_cli.py	/^    def test_copy_slice(self):$/;"	m	class:CLITests
+test_crop_and_rotate	tests/unit_tests/test_extract_proc.py	/^    def test_crop_and_rotate(self):$/;"	m	class:TestExtractProc
+test_detect_and_set_camera_parameters	tests/unit_tests/test_util.py	/^    def test_detect_and_set_camera_parameters(self):$/;"	m	class:TestExtractUtils
+test_dict_to_h5	tests/unit_tests/test_util.py	/^    def test_dict_to_h5(self):$/;"	m	class:TestExtractUtils
+test_download_flip_file	tests/integration_tests/test_cli.py	/^    def test_download_flip_file(self):$/;"	m	class:CLITests
+test_download_flip_file_command	tests/integration_tests/test_gui.py	/^    def test_download_flip_file_command(self):$/;"	m	class:GUITests
+test_em_get_ll	tests/unit_tests/test_extract_track.py	/^    def test_em_get_ll(self):$/;"	m	class:TestEMTracking
+test_em_tracking	tests/unit_tests/test_extract_track.py	/^    def test_em_tracking(self):$/;"	m	class:TestEMTracking
+test_extract	tests/integration_tests/test_cli.py	/^    def test_extract(self):$/;"	m	class:CLITests
+test_extract_command	tests/integration_tests/test_gui.py	/^    def test_extract_command(self):$/;"	m	class:GUITests
+test_extract_found_sessions	tests/integration_tests/test_gui.py	/^    def test_extract_found_sessions(self):$/;"	m	class:GUITests
+test_feature_hampel_filter	tests/unit_tests/test_extract_proc.py	/^    def test_feature_hampel_filter(self):$/;"	m	class:TestExtractProc
+test_ffv1	tests/unit_tests/test_io_video.py	/^    def test_ffv1(self):$/;"	m	class:TestVideoIO
+test_find_roi	tests/integration_tests/test_cli.py	/^    def test_find_roi(self):$/;"	m	class:CLITests
+test_find_roi_command	tests/integration_tests/test_gui.py	/^    def test_find_roi_command(self):$/;"	m	class:GUITests
+test_gen_batch_sequence	tests/unit_tests/test_util.py	/^    def test_gen_batch_sequence(self):$/;"	m	class:TestExtractUtils
+test_generate_config	tests/integration_tests/test_cli.py	/^    def test_generate_config(self):$/;"	m	class:CLITests
+test_generate_config_command	tests/integration_tests/test_gui.py	/^    def test_generate_config_command(self):$/;"	m	class:GUITests
+test_generate_index	tests/integration_tests/test_cli.py	/^    def test_generate_index(self):$/;"	m	class:CLITests
+test_generate_index_command	tests/integration_tests/test_gui.py	/^    def test_generate_index_command(self):$/;"	m	class:GUITests
+test_get_bucket_center	tests/unit_tests/test_util.py	/^    def test_get_bucket_center(self):$/;"	m	class:TestExtractUtils
+test_get_frame_features	tests/unit_tests/test_extract_proc.py	/^    def test_get_frame_features(self):$/;"	m	class:TestExtractProc
+test_get_largest_cc	tests/unit_tests/test_extract_proc.py	/^    def test_get_largest_cc(self):$/;"	m	class:TestExtractProc
+test_get_movie_info	tests/unit_tests/test_io_video.py	/^    def test_get_movie_info(self):$/;"	m	class:TestVideoIO
+test_get_raw_info	tests/unit_tests/test_io_video.py	/^    def test_get_raw_info(self):$/;"	m	class:TestVideoIO
+test_get_roi	tests/unit_tests/test_extract_proc.py	/^    def test_get_roi(self):$/;"	m	class:TestExtractProc
+test_get_selected_sessions	tests/integration_tests/test_gui.py	/^    def test_get_selected_sessions(self):$/;"	m	class:GUITests
+test_get_strels	tests/unit_tests/test_util.py	/^    def test_get_strels(self):$/;"	m	class:TestExtractUtils
+test_graduate_dilated_wall_area	tests/unit_tests/test_util.py	/^    def test_graduate_dilated_wall_area(self):$/;"	m	class:TestExtractUtils
+test_handle_extract_metadata	tests/unit_tests/test_helper_data.py	/^    def test_handle_extract_metadata(self):$/;"	m	class:TestHelperData
+test_load_h5s	tests/unit_tests/test_helper_data.py	/^    def test_load_h5s(self):$/;"	m	class:TestHelperData
+test_load_metadata	tests/unit_tests/test_util.py	/^    def test_load_metadata(self):$/;"	m	class:TestExtractUtils
+test_load_mkv_timestamps	tests/unit_tests/test_io_video.py	/^    def test_load_mkv_timestamps(self):$/;"	m	class:TestVideoIO
+test_load_movie_data	tests/unit_tests/test_io_video.py	/^    def test_load_movie_data(self):$/;"	m	class:TestVideoIO
+test_load_textdata	tests/unit_tests/test_util.py	/^    def test_load_textdata(self):$/;"	m	class:TestExtractUtils
+test_load_timestamps	tests/unit_tests/test_util.py	/^    def test_load_timestamps(self):$/;"	m	class:TestExtractUtils
+test_make_gradient	tests/unit_tests/test_util.py	/^    def test_make_gradient(self):$/;"	m	class:TestExtractUtils
+test_model_smoother	tests/unit_tests/test_extract_proc.py	/^    def test_model_smoother(self):$/;"	m	class:TestExtractProc
+test_plane_fit3	tests/unit_tests/test_extract_roi.py	/^    def test_plane_fit3(self):$/;"	m	class:TestExtractROI
+test_plane_ransac	tests/unit_tests/test_extract_roi.py	/^    def test_plane_ransac(self):$/;"	m	class:TestExtractROI
+test_process_extract_batches	tests/unit_tests/test_helper_extract.py	/^    def test_process_extract_batches(self):$/;"	m	class:TestHelperExtract
+test_read_frames_raw	tests/unit_tests/test_io_video.py	/^    def test_read_frames_raw(self):$/;"	m	class:TestVideoIO
+test_read_image	tests/unit_tests/test_io_image.py	/^    def test_read_image(self):$/;"	m	class:TestImageIO
+test_read_mkv	tests/unit_tests/test_io_video.py	/^    def test_read_mkv(self):$/;"	m	class:TestVideoIO
+test_read_tiff_files	tests/unit_tests/test_io_image.py	/^    def test_read_tiff_files(self):$/;"	m	class:TestImageIO
+test_read_yaml	tests/unit_tests/test_util.py	/^    def test_read_yaml(self):$/;"	m	class:TestExtractUtils
+test_recursive_find_h5s	tests/unit_tests/test_util.py	/^    def test_recursive_find_h5s(self):$/;"	m	class:TestExtractUtils
+test_recursive_find_unextracted_dirs	tests/unit_tests/test_util.py	/^    def test_recursive_find_unextracted_dirs(self):$/;"	m	class:TestExtractUtils
+test_run_local_extract	tests/unit_tests/test_helper_extract.py	/^    def test_run_local_extract(self):$/;"	m	class:TestHelperExtract
+test_scalar_attributes	tests/unit_tests/test_util.py	/^    def test_scalar_attributes(self):$/;"	m	class:TestExtractUtils
+test_select_strel	tests/unit_tests/test_util.py	/^    def test_select_strel(self):$/;"	m	class:TestExtractUtils
+test_strided_app	tests/unit_tests/test_util.py	/^    def test_strided_app(self):$/;"	m	class:TestExtractUtils
+test_time_str_for_filename	tests/unit_tests/test_util.py	/^    def test_time_str_for_filename(self):$/;"	m	class:TestExtractUtils
+test_write_extracted_chunk_to_h5	tests/unit_tests/test_helper_extract.py	/^    def test_write_extracted_chunk_to_h5(self):$/;"	m	class:TestHelperExtract
+test_write_frames_preview	tests/unit_tests/test_io_video.py	/^    def test_write_frames_preview(self):$/;"	m	class:TestVideoIO
+test_write_image	tests/unit_tests/test_io_image.py	/^    def test_write_image(self):$/;"	m	class:TestImageIO
+threshold_chunk	moseq2_extract/extract/extract.py	/^from moseq2_extract.extract.proc import (crop_and_rotate_frames, threshold_chunk,$/;"	i
+threshold_chunk	moseq2_extract/extract/proc.py	/^def threshold_chunk(chunk, min_height, max_height):$/;"	f
+tifffile	moseq2_extract/io/image.py	/^from skimage.external import tifffile$/;"	i
+tifffile	tests/unit_tests/test_io_image.py	/^from skimage.external import tifffile$/;"	i
+time_str_for_filename	moseq2_extract/util.py	/^def time_str_for_filename(time_str: str) -> str:$/;"	f
+time_str_for_filename	tests/unit_tests/test_util.py	/^    recursive_find_h5s, clean_file_str, load_textdata, time_str_for_filename, build_path, read_yaml, detect_and_set_camera_parameters$/;"	i
+tqdm	moseq2_extract/cli.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/extract/proc.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/extract/roi.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/extract/track.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/helpers/data.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/helpers/extract.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/helpers/wrappers.py	/^from tqdm.auto import tqdm$/;"	i
+tqdm	moseq2_extract/io/video.py	/^from tqdm.auto import tqdm$/;"	i
+urllib	moseq2_extract/helpers/wrappers.py	/^import urllib.request$/;"	i
+uuid	moseq2_extract/helpers/wrappers.py	/^import uuid$/;"	i
+uuid	tests/unit_tests/test_helper_extract.py	/^import uuid$/;"	i
+valmap	moseq2_extract/util.py	/^from cytoolz import valmap$/;"	i
+version	setup.py	/^    version=get_version('moseq2_extract\/__init__.py'),$/;"	v
+video	moseq2_extract/extract/proc.py	/^import moseq2_extract.io.video$/;"	i
+warnings	moseq2_extract/helpers/data.py	/^import warnings$/;"	i
+warnings	moseq2_extract/helpers/wrappers.py	/^import warnings$/;"	i
+warnings	moseq2_extract/util.py	/^import warnings$/;"	i
+write_extracted_chunk_to_h5	moseq2_extract/helpers/extract.py	/^def write_extracted_chunk_to_h5(h5_file, results, config_data, scalars, frame_range, offset):$/;"	f
+write_extracted_chunk_to_h5	tests/unit_tests/test_helper_extract.py	/^from moseq2_extract.helpers.extract import run_local_extract, process_extract_batches, write_extracted_chunk_to_h5$/;"	i
+write_fake_movie	tests/integration_tests/test_cli.py	/^def write_fake_movie(data_path):$/;"	f
+write_fake_movie	tests/integration_tests/test_gui.py	/^from .test_cli import write_fake_movie$/;"	i
+write_fake_movie	tests/unit_tests/test_helper_data.py	/^from ..integration_tests.test_cli import write_fake_movie$/;"	i
+write_fake_movie	tests/unit_tests/test_helper_extract.py	/^from ..integration_tests.test_cli import write_fake_movie$/;"	i
+write_fake_movie	tests/unit_tests/test_util.py	/^from ..integration_tests.test_cli import write_fake_movie$/;"	i
+write_frames	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.io.video import load_movie_data, get_movie_info, write_frames$/;"	i
+write_frames	moseq2_extract/io/video.py	/^def write_frames(filename, frames, threads=6, fps=30,$/;"	f
+write_frames	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+write_frames_preview	moseq2_extract/helpers/extract.py	/^from moseq2_extract.io.video import load_movie_data, write_frames_preview$/;"	i
+write_frames_preview	moseq2_extract/io/video.py	/^def write_frames_preview(filename, frames=np.empty((0,)), threads=6,$/;"	f
+write_frames_preview	tests/unit_tests/test_io_video.py	/^    get_movie_info, load_movie_data, load_timestamps_from_movie, read_mkv$/;"	i
+write_image	moseq2_extract/extract/proc.py	/^from moseq2_extract.io.image import read_image, write_image$/;"	i
+write_image	moseq2_extract/helpers/wrappers.py	/^from moseq2_extract.io.image import write_image$/;"	i
+write_image	moseq2_extract/io/image.py	/^def write_image(filename, image, scale=True, scale_factor=None, frame_dtype='uint16', compress=0):$/;"	f
+write_image	moseq2_extract/util.py	/^from moseq2_extract.io.image import write_image$/;"	i
+write_image	tests/unit_tests/test_io_image.py	/^from moseq2_extract.io.image import write_image, read_image, read_tiff_files$/;"	i
+yaml	moseq2_extract/cli.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	moseq2_extract/gui.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	moseq2_extract/helpers/data.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	moseq2_extract/helpers/extract.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	moseq2_extract/helpers/wrappers.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	moseq2_extract/util.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	tests/integration_tests/test_cli.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	tests/integration_tests/test_gui.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	tests/unit_tests/test_helper_data.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	tests/unit_tests/test_helper_extract.py	/^import ruamel.yaml as yaml$/;"	i
+yaml	tests/unit_tests/test_util.py	/^import ruamel.yaml as yaml$/;"	i

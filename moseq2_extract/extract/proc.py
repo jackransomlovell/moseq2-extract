@@ -396,7 +396,7 @@ def apply_otsu(frames,
         else:
             drawing = cv2.drawContours(drawing, contours, -1, (255,0,0), -1)
 
-        frame[drawing==0] = 0
+        frame[drawing == 0] = 0
     
     return frames
 

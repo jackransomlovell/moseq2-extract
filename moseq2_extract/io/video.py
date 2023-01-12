@@ -396,7 +396,7 @@ def write_frames_preview(filename, frames=np.empty((0,)), threads=6,
                          frame_size=None, depth_min=0, depth_max=80,
                          get_cmd=False, cmap='jet',
                          pipe=None, close_pipe=True, frame_range=None,
-                         progress_bar=False):
+                         heading_vec = None, progress_bar=False):
     '''
     Simple command to pipe frames to an ffv1 file.
     Writes out a false-colored mp4 video.
@@ -480,6 +480,10 @@ def write_frames_preview(filename, frames=np.empty((0,)), threads=6,
                 # len(frame_range) M < len(frames) or
                 # txt_pos is outside of the frame dimensions
                 print('Could not overlay frame number on preview on video.')
+        if heading_vec is not None:
+            pt1 = (disp_img.shape[1]//2,disp_img.shape[0]//2)
+            pt2 = (heading_vec[i,0].astype('int'),heading_vec[i,1].astype('int'))
+            disp_img = cv2.arrowedLine(disp_img,pt1,pt2,(0,255,0))  
 
         pipe.stdin.write(disp_img.astype('uint8').tostring())
 
