@@ -12,6 +12,7 @@ import scipy.signal
 import skimage.measure
 import scipy.interpolate
 import skimage.morphology
+from skimage.morphology import convex_hull_image
 from copy import deepcopy
 from tqdm.auto import tqdm
 import moseq2_extract.io.video
@@ -138,6 +139,64 @@ def get_bground_im_file(frames_file, frame_stride=500, med_scale=5, output_dir=N
         bground = read_image(bground_path, scale=True)
         
     return bground
+
+def plane_bgsub(frames,
+                floor_range = (625,650),
+		noise_tolerance = 30,
+		in_ratio = 0.1,
+                iters = 100,
+                non_zero_ransac = True):
+    '''
+    Estimates a plane for every frame, and subtracts that frame from each frame. 
+
+    Parameters
+    ----------
+    frames (3D numpy.ndarray): Raw depth frames to be subtracted
+    floor_range (tuple): Range of floor values to search for plane
+    noise_tolerance (float): dist. from plane to consider a point an inlier  
+    in_ratio (float): frac. of points required to consider a plane fit good
+    non_zero_ransac (bool): Whether to only include non-zero pixels in RANSAC computation
+    
+    '''    
+
+    # init objs to hold frames
+    bgsubed = np.zeros_like(frames)
+    planes = np.zeros_like(frames)
+    # iterate through frames
+    for i, frame in tqdm(enumerate(frames), total = frames.shape[0]):
+        # apply mask for non zero only plane computation
+        if non_zero_ransac:
+            mask = (frame != 0).astype('int')
+        else:
+            mask = None
+        # get plane with ransac
+        _, dist = plane_ransac(frame, floor_range = floor_range, mask = mask, iters = iters, noise_tolerance = noise_tolerance, in_ratio = in_ratio)
+        plane = dist.reshape(frame.shape)
+        # subtract
+        subed = (frame.astype('int16')-plane.astype('int16'))
+        # assign in variables
+        planes[i] = plane
+        bgsubed[i] = subed
+
+    return bgsubed, planes
+
+def get_roi(dist, dilate_strel, noise_tol = 20):
+    '''
+    Get an ROI from the mean plane across a number of frames. 
+
+    Parameters
+    ----------
+    dist (2D np.ndarray): Mean plane estimated by RANSAC across a number of frames
+    dilate_strel (2D np.ndarray): Structuring element for roi dilation
+    noise_tolerance (float): dist. from plane to consider a point an inlier  
+    '''
+
+    bin_plane = (dist<noise_tol).astype('uint8')
+    chull = convex_hull_image(bin_plane).astype('uint8')
+    roi = cv2.dilate(chull, dilate_strel)
+
+    return roi
+
 
 
 def get_bbox(roi):
