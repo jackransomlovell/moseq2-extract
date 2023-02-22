@@ -177,15 +177,17 @@ def median_plane(frames,
 
     return planes, avg_plane
 
-def get_bground_plane(frames,
-                      plane):
-
-    xx, yy = np.meshgrid(np.arange(frames.shape[2]), np.arange(frames.shape[1]))
+def get_bground_plane(finfo,
+                      plane,
+                      **kwargs):
+    
+    # define coordinates
+    xx, yy = np.meshgrid(np.arange(finfo['dims'][1], finfo['dims'][0])
     coords = np.vstack([xx.ravel(),yy.ravel()]).T
     #assuming c and z correspond to indices 2, and 3
     intercept = plane[2]-plane[3]
     plane = np.dot(coords, plane[:2])+intercept
-    plane = np.abs(plane.reshape(frames[0].shape)).astype('float16')
+    plane = np.abs(plane.reshape(finfo['dims'])).astype('float16')
 
     return plane
 
