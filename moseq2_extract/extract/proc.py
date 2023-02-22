@@ -170,7 +170,7 @@ def plane_bgsub(frames,
         else:
             mask = None
         # get plane with ransac
-        _, dist = plane_ransac(frame, floor_range = floor_range, mask = mask, iters = iters, noise_tolerance = noise_tolerance, in_ratio = in_ratio)
+        _, dist = moseq2_extract.extract.roi.plane_ransac(frame, floor_range = floor_range, mask = mask, iters = iters, noise_tolerance = noise_tolerance, in_ratio = in_ratio)
         plane = dist.reshape(frame.shape)
         # subtract
         subed = (frame.astype('int16')-plane.astype('int16'))
