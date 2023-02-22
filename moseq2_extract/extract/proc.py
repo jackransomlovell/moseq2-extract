@@ -140,14 +140,14 @@ def get_bground_im_file(frames_file, frame_stride=500, med_scale=5, output_dir=N
         
     return bground
 
-def plane_bgsub(frames,
-                floor_range = (625,650),
-		noise_tolerance = 30,
-		in_ratio = 0.1,
-                iters = 100,
-                non_zero_ransac = True):
+def median_plane(frames,
+                 floor_range = (625,650),
+		         noise_tolerance = 10,
+		         in_ratio = 0.1,
+                 iters = 1000,
+                 non_zero_ransac = True):
     '''
-    Estimates a plane for every frame, and subtracts that frame from each frame. 
+    Estimates a plane for every frame, and finds the median value for each parameter
 
     Parameters
     ----------
@@ -159,9 +159,8 @@ def plane_bgsub(frames,
     
     '''    
 
-    # init objs to hold frames
-    bgsubed = np.zeros_like(frames)
-    planes = np.zeros_like(frames)
+    # init objs to hold planes
+    planes = np.zeros((frames.shape[0],4))
     # iterate through frames
     for i, frame in tqdm(enumerate(frames), total = frames.shape[0]):
         # apply mask for non zero only plane computation
@@ -169,18 +168,29 @@ def plane_bgsub(frames,
             mask = (frame != 0).astype('int')
         else:
             mask = None
-        # get plane with ransac
-        _, dist = moseq2_extract.extract.roi.plane_ransac(frame, floor_range = floor_range, mask = mask, iters = iters, noise_tolerance = noise_tolerance, in_ratio = in_ratio)
-        plane = dist.reshape(frame.shape)
-        # subtract
-        subed = (frame.astype('int16')-plane.astype('int16'))
-        # assign in variables
+        # get plane dist with ransac
+        plane, dist = moseq2_extract.extract.roi.plane_ransac(frame, floor_range = floor_range, mask = mask, iters = iters, noise_tolerance = noise_tolerance, in_ratio = in_ratio)
         planes[i] = plane
-        bgsubed[i] = subed
 
-    return bgsubed, planes
+    # get avg plane
+    avg_plane = np.nanmedian(planes, axis=0)
 
-def get_avg_plane_roi(dist, dilate_strel, noise_tol = 20):
+    return planes, avg_plane
+
+def subtract_plane(frames,
+                   plane):
+
+    xx, yy = np.meshgrid(np.arange(frames.shape[2]), np.arange(frames.shape[1]))
+    coords = np.vstack([xx.ravel(),yy.ravel()]).T
+    #assuming c and z correspond to indices 2, and 3
+    intercept = plane[2]-plane[3]
+    plane = np.dot(coords, plane[:2])+intercept
+    plane = np.abs(plane.reshape(frames[0].shape))
+    subed = (plane.astype('float16')-frames.astype('float16')).astype(frames.dtype)
+
+    return subed
+
+def get_med_plane_roi(frame, plane, dilate_strel, noise_tol = 10):
     '''
     Get an ROI from the mean plane across a number of frames. 
 
@@ -190,7 +200,10 @@ def get_avg_plane_roi(dist, dilate_strel, noise_tol = 20):
     dilate_strel (2D np.ndarray): Structuring element for roi dilation
     noise_tolerance (float): dist. from plane to consider a point an inlier  
     '''
-
+    xx, yy = np.meshgrid(np.arange(frame.shape[1]), np.arange(frame.shape[0]))
+    coords = np.vstack((xx.ravel(), yy.ravel(), frame.ravel())).T
+    dist = np.abs(np.dot(coords, plane[:3])+plane[3])
+    dist = dist.reshape(frame.shape)
     bin_plane = (dist<noise_tol).astype('uint8')
     chull = convex_hull_image(bin_plane).astype('uint8')
     roi = cv2.dilate(chull, dilate_strel)
