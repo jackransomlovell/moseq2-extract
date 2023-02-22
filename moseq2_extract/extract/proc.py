@@ -180,7 +180,7 @@ def plane_bgsub(frames,
 
     return bgsubed, planes
 
-def get_roi(dist, dilate_strel, noise_tol = 20):
+def get_avg_plane_roi(dist, dilate_strel, noise_tol = 20):
     '''
     Get an ROI from the mean plane across a number of frames. 
 
