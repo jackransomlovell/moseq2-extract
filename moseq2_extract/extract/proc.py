@@ -90,8 +90,59 @@ def get_largest_cc(frames, progress_bar=False):
 
     return foreground_obj
 
+def compute_bground(frames_file, 
+                    plane_bground = False,
+                    finfo = None,
+                    output_dir = None,
+                    nframes = 1000,
+                    frame_stride = 500,
+                    med_scale = 5,
+                    floor_range = (625,650),
+		            noise_tolerance = 10,
+		            in_ratio = 0.1,
+                    iters = 1000,
+                    non_zero_ransac = True,
+                    **kwargs):
 
-def get_bground_im_file(frames_file, frame_stride=500, med_scale=5, output_dir=None, **kwargs):
+    if finfo is None:
+        finfo = moseq2_extract.io.video.get_movie_info(frames_file, **kwargs)
+    if not plane_bground:
+        plane = None
+        frame_idx = np.arange(0, finfo['nframes'], frame_stride)
+        frame_store = []
+        for i, frame in enumerate(frame_idx):
+            frs = moseq2_extract.io.video.load_movie_data(frames_file,
+                                                          [int(frame)],
+                                                          frame_size=finfo['dims'],
+                                                          finfo=finfo,
+                                                          **kwargs).squeeze()
+            frame_store.append(cv2.medianBlur(frs, med_scale))
+        bground = np.nanmedian(frame_store, axis=0)
+    else:
+        frames = moseq2_extract.io.video.load_movie_data(frames_file,
+                                                         frames=range(0,nframes),
+                                                         frames_size=finfo['dims'],
+                                                         finfo=finfo)
+        _, plane = median_plane(frames,
+                                 floor_range = floor_range,
+                                 iters = iters,
+                                 noise_tolerance = noise_tolerance,
+                                 in_ratio= in_ratio,
+                                 non_zero_ransac = non_zero_ransac)
+
+        bground = get_bground_plane(finfo, plane).astype('int')
+
+    # write file
+    if output_dir is None:
+        bground_path = join(dirname(frames_file), 'proc', 'bground.tiff')
+    else:
+        bground_path = join(output_dir, 'bground.tiff')
+
+    write_image(bground_path, bground, scale = True) 
+
+    return bground, plane
+
+def get_bground_im_file(frames_file, output_dir=None):
     '''
     Returns background from file. If the file is not found, session frames will be read in
      and a median frame (background) will be computed.
@@ -116,27 +167,8 @@ def get_bground_im_file(frames_file, frame_stride=500, med_scale=5, output_dir=N
     if type(frames_file) is not tarfile.TarFile:
         kwargs = deepcopy(kwargs)
     finfo = kwargs.pop('finfo', None)
-
-    # Compute background image if it doesn't exist. Otherwise, load from file
-    if not exists(bground_path) or kwargs.get('recompute_bg', False):
-        if finfo is None:
-            finfo = moseq2_extract.io.video.get_movie_info(frames_file, **kwargs)
-
-        frame_idx = np.arange(0, finfo['nframes'], frame_stride)
-        frame_store = []
-        for i, frame in enumerate(frame_idx):
-            frs = moseq2_extract.io.video.load_movie_data(frames_file,
-                                                          [int(frame)], 
-                                                          frame_size=finfo['dims'], 
-                                                          finfo=finfo, 
-                                                          **kwargs).squeeze()
-            frame_store.append(cv2.medianBlur(frs, med_scale))
-
-        bground = np.nanmedian(frame_store, axis=0)
-
-        write_image(bground_path, bground, scale=True)
-    else:
-        bground = read_image(bground_path, scale=True)
+    
+    bground = read_image(bground_path, scale=True)
         
     return bground
 
@@ -182,12 +214,12 @@ def get_bground_plane(finfo,
                       **kwargs):
     
     # define coordinates
-    xx, yy = np.meshgrid(np.arange(finfo['dims'][1], finfo['dims'][0])
+    xx, yy = np.meshgrid(np.arange(finfo['dims'][0]), np.arange(finfo['dims'][1]))
     coords = np.vstack([xx.ravel(),yy.ravel()]).T
     #assuming c and z correspond to indices 2, and 3
     intercept = plane[2]-plane[3]
     plane = np.dot(coords, plane[:2])+intercept
-    plane = np.abs(plane.reshape(finfo['dims'])).astype('float16')
+    plane = np.abs(plane.reshape(finfo['dims'][::-1])).astype('float16')
 
     return plane
 
