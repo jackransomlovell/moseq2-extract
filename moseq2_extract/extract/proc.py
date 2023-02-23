@@ -142,7 +142,7 @@ def compute_bground(frames_file,
 
     return bground, plane
 
-def get_bground_im_file(frames_file, output_dir=None):
+def get_bground_im_file(frames_file, output_dir=None, **kwargs):
     '''
     Returns background from file. If the file is not found, session frames will be read in
      and a median frame (background) will be computed.
@@ -168,8 +168,11 @@ def get_bground_im_file(frames_file, output_dir=None):
         kwargs = deepcopy(kwargs)
     finfo = kwargs.pop('finfo', None)
     
-    bground = read_image(bground_path, scale=True)
-        
+    try:
+        bground = read_image(bground_path, scale=True)
+    except:
+        print('No background file, returning None')
+        bground = None
     return bground
 
 def median_plane(frames,
