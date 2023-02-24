@@ -220,7 +220,7 @@ def get_bground_plane(finfo,
     xx, yy = np.meshgrid(np.arange(finfo['dims'][0]), np.arange(finfo['dims'][1]))
     coords = np.vstack([xx.ravel(),yy.ravel()])
     plane = (np.dot(coords.T, plane[:2]) + plane[3]) / -plane[2]
-    plane = plane.reshape(finfo['dims'][::-1]))
+    plane = plane.reshape(finfo['dims'][::-1])
 
     return plane
 
