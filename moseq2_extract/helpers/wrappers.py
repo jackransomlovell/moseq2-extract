@@ -18,7 +18,7 @@ from tqdm.auto import tqdm
 from cytoolz import partial
 from moseq2_extract.io.image import write_image
 from moseq2_extract.helpers.extract import process_extract_batches
-from moseq2_extract.extract.proc import get_roi, get_bground_im_file
+from moseq2_extract.extract.proc import get_roi, get_bground_im_file, get_med_plane_roi, compute_bground
 from os.path import join, exists, dirname, basename, abspath, splitext
 from moseq2_extract.io.video import load_movie_data, get_movie_info, write_frames
 from moseq2_extract.util import mouse_threshold_filter, filter_warnings, read_yaml
@@ -185,8 +185,10 @@ def get_roi_wrapper(input_file, config_data, output_dir=None):
     config_data = detect_and_set_camera_parameters(config_data, input_file)
 
     print('Getting background...')
-    bground_im = get_bground_im_file(input_file, **config_data)
-    write_image(join(output_dir, 'bground.tiff'), bground_im, scale=True)
+    try:
+        bground_im, plane = get_bground_im_file(input_file, **config_data)
+    except:
+        bground_im, plane = compute_bground(input_file, **config_data, **kwargs)
 
     # readjust depth range
     if not config_data.get('manual_set_depth_range', False):
@@ -201,19 +203,23 @@ def get_roi_wrapper(input_file, config_data, output_dir=None):
         config_data['bg_roi_depth_range'] = [int(adjusted_bg_depth_range-50), int(adjusted_bg_depth_range+50)]
 
     first_frame = load_movie_data(input_file, 0, **config_data) # there is a tar object flag that must be set!!
+    print(f'first frame shape: {first_frame.shape}')
     write_image(join(output_dir, 'first_frame.tiff'), first_frame, scale=True,
                 scale_factor=config_data['bg_roi_depth_range'])
 
     print('Getting roi...')
     strel_dilate = select_strel(config_data['bg_roi_shape'], tuple(config_data['bg_roi_dilate']))
     strel_erode = select_strel(config_data['bg_roi_shape'], tuple(config_data['bg_roi_erode']))
-
-    rois, plane = get_roi(bground_im,
-                          **config_data,
-                          strel_dilate=strel_dilate,
-                          strel_erode=strel_erode,
-                          get_all_data=False
-                          )
+    
+    if not config_data['plane_bg_flag']:
+        rois, plane = get_roi(bground_im,
+                              **config_data,
+                              strel_dilate=strel_dilate,
+                              strel_erode=strel_erode,
+                              get_all_data=False
+                              )
+    else:
+        rois = get_med_plane_roi(first_frame.squeeze(), plane, strel_dilate, config_data['roi_noise_tol'])[None]
 
     if config_data['use_plane_bground']:
         print('Using plane fit for background...')
