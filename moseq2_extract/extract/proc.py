@@ -218,11 +218,9 @@ def get_bground_plane(finfo,
     
     # define coordinates
     xx, yy = np.meshgrid(np.arange(finfo['dims'][0]), np.arange(finfo['dims'][1]))
-    coords = np.vstack([xx.ravel(),yy.ravel()]).T
-    #assuming c and z correspond to indices 2, and 3
-    intercept = plane[2]-plane[3]
-    plane = np.dot(coords, plane[:2])+intercept
-    plane = np.abs(plane.reshape(finfo['dims'][::-1])).astype('float16')
+    coords = np.vstack([xx.ravel(),yy.ravel()])
+    plane = (np.dot(coords.T, plane[:2]) + plane[3]) / -plane[2]
+    plane = plane.reshape(finfo['dims'][::-1]))
 
     return plane
 
