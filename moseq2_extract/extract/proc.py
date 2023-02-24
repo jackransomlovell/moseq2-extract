@@ -135,10 +135,15 @@ def compute_bground(frames_file,
     # write file
     if output_dir is None:
         bground_path = join(dirname(frames_file), 'proc', 'bground.tiff')
+        plane_path = join(dirname(frames_file), 'proc', 'med_plane.npy')
     else:
         bground_path = join(output_dir, 'bground.tiff')
+        plane_path = join(output_dir, 'med_plane.npy')
 
     write_image(bground_path, bground, scale = True) 
+
+    if plane is not None:
+        np.save(plane_path, plane)
 
     return bground, plane
 
@@ -161,8 +166,10 @@ def get_bground_im_file(frames_file, output_dir=None, **kwargs):
 
     if output_dir is None:
         bground_path = join(dirname(frames_file), 'proc', 'bground.tiff')
+        plane_path = join(dirname(frames_file), 'proc', 'med_plane.npy')
     else:
         bground_path = join(output_dir, 'bground.tiff')
+        plane_path = join(output_dir, 'med_plane.npy')
 
     if type(frames_file) is not tarfile.TarFile:
         kwargs = deepcopy(kwargs)
@@ -173,7 +180,14 @@ def get_bground_im_file(frames_file, output_dir=None, **kwargs):
     except:
         print('No background file, returning None')
         bground = None
-    return bground
+
+    if exists(plane_path):
+        plane = np.load(plane_path, allow_pickle = True)
+    else:
+        plane = None
+        print('No plane file, returning None')
+
+    return bground, plane
 
 def median_plane(frames,
                  floor_range = (625,650),
