@@ -91,22 +91,22 @@ def get_largest_cc(frames, progress_bar=False):
     return foreground_obj
 
 def compute_bground(frames_file, 
-                    plane_bground = False,
+                    plane_bg_flag = False,
                     finfo = None,
                     output_dir = None,
-                    nframes = 1000,
+                    plane_bg_nframes = 1000,
                     frame_stride = 500,
                     med_scale = 5,
-                    floor_range = (625,650),
-		            noise_tolerance = 10,
-		            in_ratio = 0.1,
-                    iters = 1000,
-                    non_zero_ransac = True,
+                    plane_bg_floor_range = (625,650),
+		            plane_bg_noise_tol = 10,
+		            plane_bg_inratio = 0.1,
+                    plane_bg_iters = 1000,
+                    plane_bg_nonzero = True,
                     **kwargs):
 
     if finfo is None:
         finfo = moseq2_extract.io.video.get_movie_info(frames_file, **kwargs)
-    if not plane_bground:
+    if not plane_bg_flag:
         plane = None
         frame_idx = np.arange(0, finfo['nframes'], frame_stride)
         frame_store = []
@@ -120,15 +120,15 @@ def compute_bground(frames_file,
         bground = np.nanmedian(frame_store, axis=0)
     else:
         frames = moseq2_extract.io.video.load_movie_data(frames_file,
-                                                         frames=range(0,nframes),
+                                                         frames=range(0,plane_bg_nframes),
                                                          frames_size=finfo['dims'],
                                                          finfo=finfo)
         _, plane = median_plane(frames,
-                                 floor_range = floor_range,
-                                 iters = iters,
-                                 noise_tolerance = noise_tolerance,
-                                 in_ratio= in_ratio,
-                                 non_zero_ransac = non_zero_ransac)
+                                 floor_range = plane_bg_floor_range,
+                                 iters = plane_bg_iters,
+                                 noise_tolerance = plane_bg_noise_tol,
+                                 in_ratio= plane_bg_inratio,
+                                 non_zero_ransac = plane_bg_nonzero)
 
         bground = get_bground_plane(finfo, plane).astype('int')
 
