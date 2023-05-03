@@ -132,9 +132,6 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
     else:
         canny_msks = None
 
-
-
-
     # Apply ROI mask
     if roi is not None:
         chunk = apply_roi(chunk, roi)
@@ -240,6 +237,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
         'chunk': chunk,
         'depth_frames': cropped_frames,
         'mask_frames': mask,
+        'canny_msks': canny_msks,
         'scalars': scalars,
         'flips': flips,
         'parameters': parameters

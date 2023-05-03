@@ -823,3 +823,4 @@ def get_canny_msk(frame, wall_msk, floor_msk,
     msk = cv2.dilate(msk.astype('uint8'),dilate_kernel,iterations=final_dilate_iters)
     
     return msk
+
