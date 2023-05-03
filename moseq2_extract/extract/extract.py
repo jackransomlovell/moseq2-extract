@@ -19,7 +19,7 @@ from moseq2_extract.extract.track import em_tracking, em_get_ll
 from moseq2_extract.extract.proc import (crop_and_rotate_frames, threshold_chunk,
                                          clean_frames, apply_roi, get_frame_features,
                                          get_flips, compute_scalars, feature_hampel_filter,
-                                         model_smoother)
+                                         model_smoother, get_canny_msk)
 
 # one stop shopping for taking some frames and doing stuff
 def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
@@ -111,16 +111,29 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
         if canny_extract:
             param_path = os.path.join(seg_params_path)
             with open(param_path, 'rb') as handle:
-                seg_params = pickle.load(handle)
+                canny_params = pickle.load(handle)
 
-            glob_roi = seg_params['glob_roi']
-            wall_msk = seg_params['wall_roi']
-            floor_msk = seg_params['floor_roi']
+            glob_roi = canny_params['glob_roi']
+            wall_msk = canny_params['wall_roi']
+            floor_msk = canny_params['floor_roi']
         else:
             glob_roi, wall_msk, floor_msk = np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape)
 
         # Threshold chunk depth values at min and max heights also apply global roi
         chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)*glob_roi
+
+    if canny_extract:
+        canny_msks = []
+        for i in range(chunk.shape[0]):
+            msk = get_canny_msk(chunk[i], wall_msk, floor_msk, canny_params['t1'], canny_params['t2'],
+                                tail_size = canny_params['tail_size'], otsu = canny_params['otsu'], final_dilate = canny_params['final_dilate'])
+            chunk[i] = chunk[i]*msk
+            canny_msks.append(msk)
+    else:
+        canny_msks = None
+
+
+
 
     # Apply ROI mask
     if roi is not None:
