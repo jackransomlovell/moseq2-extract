@@ -12,6 +12,7 @@ import scipy.signal
 import skimage.measure
 import scipy.interpolate
 import skimage.morphology
+from skimage.morphology import convex_hull_image
 from copy import deepcopy
 from tqdm.auto import tqdm
 import moseq2_extract.io.video
@@ -732,3 +733,93 @@ def model_smoother(features, ll=None, clips=(-300, -125)):
             features[k][i] = (1 - smoother) * v[i + 1] + smoother * v[i]
 
     return features
+
+### begin canny extraction algo for rats
+
+def canny_hull(frame, arena_msk, t1 ,t2, chull_tol = 10e-1, otsu = True):
+    
+    # get bitwise and of frame and arena mask
+    frame_masked = frame*arena_msk
+    
+    # use canny 
+    can = cv2.Canny((frame_masked).astype('uint8'), t1, t2, L2gradient = True)
+
+    # get convex hull of edeges
+    # possible improvement: get convex hull with opencv for wall
+    chull = convex_hull_image(can, tolerance = chull_tol)
+    
+    msk = frame_masked*chull
+    
+    if otsu:
+    
+        #otsu
+        ret2, _ = cv2.threshold((msk).astype('uint8'),0,255,
+                            cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        # get otsu mask
+        msk = (msk > ret2).astype('uint8')
+    
+    return msk
+
+def floor_noise(frame, min_height, arena_msk, opening_size = (3,3), 
+                opening_iters = 1):
+    
+    # get binary msk w/ roi
+    msk = (frame > min_height)*arena_msk
+    # get rid of noise left over 
+    msk = cv2.morphologyEx(
+                           msk.astype('uint8'),
+                           cv2.MORPH_OPEN,
+                           cv2.getStructuringElement(cv2.MORPH_ELLIPSE,
+                                                     opening_size),
+                           iterations=opening_iters,
+                           )
+    # filter out any large blobs left over from the noise
+    msk = filt_contours(msk)
+    
+    return msk
+
+def filt_contours(mask):
+    
+    cnts, _ = cv2.findContours(mask.astype('uint8'),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+
+    if len(cnts) > 0:
+        area = []
+        for cnt in cnts:
+            a = cv2.contourArea(cnt)
+            area.append(a)
+        cnt_ind = np.argmax(area)
+        mask = np.zeros_like(mask)
+        cv2.fillPoly(mask,[cnts[cnt_ind]],1)
+    
+    return mask
+
+def get_canny_msk(frame, wall_msk, floor_msk,
+                  t1 ,t2, chull_tol = 10e-1, otsu = True,
+                  min_height = 10, opening_size = (3,3), openeing_iters = 1,
+                  tail_size = (11,11), tail_iters = 1,
+                  final_dilate = (5,5), final_dilate_iters = 1):
+    # wall 
+    wall = canny_hull(frame, wall_msk, t1 ,t2, chull_tol, otsu)
+    # floor
+    floor = floor_noise(frame, min_height, floor_msk, opening_size, openeing_iters)
+    # filter out any blobs that are still around
+    floor = filt_contours(floor)
+    
+    # get bitwise or
+    msk = (wall > 0) | (floor > 0)
+    
+    
+    # get rid of tail
+    strel_tail=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, tail_size)
+    msk = cv2.morphologyEx(msk.astype('uint8'), cv2.MORPH_CLOSE, strel_tail,
+                           tail_iters)
+    strel_tail=cv2.getStructuringElement(cv2.MORPH_ELLIPSE, tail_size)
+    msk = cv2.morphologyEx(msk.astype('uint8'), cv2.MORPH_OPEN, strel_tail,
+                           tail_iters)
+    
+    
+    # final dilation
+    dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,final_dilate)
+    msk = cv2.dilate(msk.astype('uint8'),dilate_kernel,iterations=final_dilate_iters)
+    
+    return msk
