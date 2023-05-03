@@ -13,6 +13,8 @@ results_00.h5 file.
 import cv2
 import numpy as np
 from copy import deepcopy
+import pickle
+import os
 from moseq2_extract.extract.track import em_tracking, em_get_ll
 from moseq2_extract.extract.proc import (crop_and_rotate_frames, threshold_chunk,
                                          clean_frames, apply_roi, get_frame_features,
@@ -39,6 +41,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   angle_hampel_span=5, angle_hampel_sig=3,
                   model_smoothing_clips=(-300, -150), tracking_model_init='raw',
                   compute_raw_scalars=False,
+                  canny_extract=False, seg_params_path=None,
                   **kwargs):
     '''
     This function looks for a mouse in background-subtracted frames from a chunk of depth video.
@@ -105,8 +108,19 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
             chunk = (bground - chunk) * np.logical_not(mouse_on_edge) + \
                          (true_depth - chunk) * mouse_on_edge
 
-        # Threshold chunk depth values at min and max heights
-        chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)
+        if canny_extract:
+            param_path = os.path.join(seg_params_path)
+            with open(param_path, 'rb') as handle:
+                seg_params = pickle.load(handle)
+
+            glob_roi = seg_params['glob_roi']
+            wall_msk = seg_params['wall_roi']
+            floor_msk = seg_params['floor_roi']
+        else:
+            glob_roi, wall_msk, floor_msk = np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape)
+
+        # Threshold chunk depth values at min and max heights also apply global roi
+        chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)*glob_roi
 
     # Apply ROI mask
     if roi is not None:
