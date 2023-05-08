@@ -41,7 +41,8 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   angle_hampel_span=5, angle_hampel_sig=3,
                   model_smoothing_clips=(-300, -150), tracking_model_init='raw',
                   compute_raw_scalars=False,
-                  canny_extract=False, seg_params_path=None,
+                  canny_extract=False, global_roi_path=None, floor_roi_path=None,
+                  canny_t1=90, canny_t2=260, otsu=True, final_dilate=(3,)*2, tail_filter_size=(9,)*2, 
                   **kwargs):
     '''
     This function looks for a mouse in background-subtracted frames from a chunk of depth video.
@@ -108,25 +109,27 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
             chunk = (bground - chunk) * np.logical_not(mouse_on_edge) + \
                          (true_depth - chunk) * mouse_on_edge
 
-        if canny_extract:
-            param_path = os.path.join(seg_params_path)
-            with open(param_path, 'rb') as handle:
-                canny_params = pickle.load(handle)
-
-            glob_roi = canny_params['glob_roi']
-            wall_msk = canny_params['wall_roi']
-            floor_msk = canny_params['floor_roi']
-        else:
-            glob_roi, wall_msk, floor_msk = np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape)
+    if canny_extract:
+        glob_msk = np.load(global_roi_path, allow_pickle=True)
+        floor_msk = np.load(floor_roi_path, allow_pickle=True)
+        wall_msk = (~floor_msk.astype(bool)).astype(np.uint8)
+    else:
+        glob_msk, wall_msk, floor_msk = np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape)
 
         # Threshold chunk depth values at min and max heights also apply global roi
-        chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)*glob_roi
+        chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)*glob_msk
 
     if canny_extract:
         canny_msks = []
         for i in range(chunk.shape[0]):
-            msk = get_canny_msk(chunk[i], wall_msk, floor_msk, canny_params['t1'], canny_params['t2'],
-                                tail_size = canny_params['tail_size'], otsu = canny_params['otsu'], final_dilate = canny_params['final_dilate'])
+            msk = get_canny_msk(chunk[i], 
+                                wall_msk,
+                                floor_msk,
+                                canny_t1, 
+                                canny_t2,
+                                tail_size=tail_filter_size, 
+                                otsu=otsu, 
+                                final_dilate=final_dilate)
             chunk[i] = chunk[i]*msk
             canny_msks.append(msk)
     else:
