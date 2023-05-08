@@ -108,18 +108,20 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
             mouse_on_edge = (bground < true_depth) & (chunk < bground)
             chunk = (bground - chunk) * np.logical_not(mouse_on_edge) + \
                          (true_depth - chunk) * mouse_on_edge
+            
+    # Threshold chunk depth values at min and max heights also apply global roi
+    chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)
 
     if canny_extract:
+
+        # load rois
         glob_msk = np.load(global_roi_path, allow_pickle=True)
         floor_msk = np.load(floor_roi_path, allow_pickle=True)
         wall_msk = (~floor_msk.astype(bool)).astype(np.uint8)
-    else:
-        glob_msk, wall_msk, floor_msk = np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape)
 
-        # Threshold chunk depth values at min and max heights also apply global roi
-        chunk = threshold_chunk(chunk, min_height, max_height).astype(frame_dtype)*glob_msk
+        #apply global roi
+        chunk = chunk*glob_msk
 
-    if canny_extract:
         canny_msks = []
         for i in range(chunk.shape[0]):
             msk = get_canny_msk(chunk[i], 
@@ -134,6 +136,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
             canny_msks.append(msk)
     else:
         canny_msks = None
+        glob_msk, wall_msk, floor_msk = np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape), np.ones_like(chunk[0].shape)
 
     # Apply ROI mask
     if roi is not None:
