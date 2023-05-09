@@ -402,11 +402,10 @@ def load_metadata(metadata_file):
         if not exists(metadata_file):
             generate_missing_metadata(dirname(metadata_file), basename(dirname(metadata_file)))
 
-        with open(metadata_file, 'r') as f:
-            metadata = json.load(f)
+        metadata = read_yaml(metadata_file)
     except TypeError:
         # try loading directly
-        metadata = json.load(metadata_file)
+        metadata = read_yaml(metadata_file)
 
     return metadata
 

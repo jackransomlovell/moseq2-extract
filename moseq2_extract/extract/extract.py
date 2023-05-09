@@ -42,7 +42,7 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                   model_smoothing_clips=(-300, -150), tracking_model_init='raw',
                   compute_raw_scalars=False,
                   canny_extract=False, global_roi_path=None, floor_roi_path=None,
-                  canny_t1=90, canny_t2=260, otsu=True, final_dilate=(3,)*2, tail_filter_size=(9,)*2, 
+                  canny_t1=90, canny_t2=260, otsu=True, final_dilate=(3,3), tail_filter_size=(9,9), 
                   **kwargs):
     '''
     This function looks for a mouse in background-subtracted frames from a chunk of depth video.
@@ -129,9 +129,9 @@ def extract_chunk(chunk, use_tracking_model=False, spatial_filter_size=(3,),
                                 floor_msk,
                                 canny_t1, 
                                 canny_t2,
-                                tail_size=tail_filter_size, 
+                                tail_size=tuple(tail_filter_size), 
                                 otsu=otsu, 
-                                final_dilate=final_dilate)
+                                final_dilate=tuple(final_dilate))
             chunk[i] = chunk[i]*msk
             canny_msks.append(msk)
     else:
