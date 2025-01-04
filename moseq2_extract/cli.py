@@ -445,6 +445,17 @@ This is only a debugging parameter, for cases where dilate_iterations > 1, other
         is_flag=True,
         help="Will skip the extraction if it is already completed.",
     )(function)
+    function = click.option(
+        "--sam2",
+        is_flag=True,
+        help="Use SAM2 to predict segment mouse"
+    )(function)
+    function = click.option(
+        "--sam2-checkpoint",
+        type=click.Path(),
+        default=None,
+        help="Path to SAM2 checkpoint file"
+    )(function)
 
     return function
 
