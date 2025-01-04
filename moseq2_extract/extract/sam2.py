@@ -9,6 +9,34 @@ from moseq2_extract.extract.proc import clean_frames
 from sam2.build_sam import build_sam2_video_predictor
 
 
+def load_dlc(csv, bodyparts, frame_range):
+    """
+    Load DLC data from a CSV file and extract the specified body parts.
+
+    Parameters:
+    - csv: str or Path
+        Path to the CSV file containing the DLC data.
+    - bodyparts: list of str
+        List of body parts to extract from the DLC data.
+    - frame_range: slice
+        Slice object specifying the range of frames to extract.
+
+    Returns:
+    - input_point: numpy.ndarray
+        2D numpy array with shape (n_points, 2) containing the x and y coordinates of the body parts.
+    - input_label: numpy.ndarray
+        1D numpy array with shape (n_points,) containing the labels of the body parts.
+    """
+
+    dlc = pd.read_csv(csv, index_col=0, header=[1, 2])
+    dlc.columns = [f"{c[0]}_{c[1]}" for c in dlc.columns]
+    keypoints_df = dlc[[c for c in dlc.columns if '_x' in c or '_y' in c]]
+    keypoints_df = keypoints_df[[c for c in keypoints_df.columns if c in bodyparts]]
+    keypoints_df = keypoints_df.loc[frame_range]
+    input_point = keypoints_df.iloc[0, :].values.reshape(-1, 2)
+
+    return input_point
+
 def save_frames_to_jpg(array, output_folder, base_filename="frame"):
     """
     Saves each frame in the time axis of a 3D numpy array as a JPG file.
