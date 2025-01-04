@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 from copy import deepcopy
 from moseq2_extract.extract.track import em_tracking, em_get_ll
+from moseq2_extract.extract.sam2 import get_sam2_predictor, segment_chunk
 from moseq2_extract.extract.proc import (
     crop_and_rotate_frames,
     threshold_chunk,
@@ -15,7 +16,7 @@ from moseq2_extract.extract.proc import (
     get_flips,
     compute_scalars,
     feature_hampel_filter,
-    model_smoother,
+    model_smoother
 )
 
 
@@ -55,6 +56,8 @@ def extract_chunk(
     model_smoothing_clips=(-300, -150),
     tracking_model_init="raw",
     compute_raw_scalars=False,
+    sam2=False,
+    sam2_checkpoint=None,
     **kwargs
 ):
     """
@@ -125,6 +128,27 @@ def extract_chunk(
     # Apply ROI mask
     if roi is not None:
         chunk = apply_roi(chunk, roi)
+        # TODO: modify the keypoint coords to reflect the new ROI
+    
+    # pack clean params into a dict
+    clean_params = {
+        'prefilter_space': spatial_filter_size,
+        'prefilter_time': temporal_filter_size,
+        'iters_tail': tail_filter_iters,
+        'strel_tail': strel_tail,
+        'iters_min': iters_min,
+        'strel_min': strel_min,
+        'frame_dtype': frame_dtype,
+        'progress_bar': progress_bar,
+    }
+
+    if sam2:
+        predictor = get_sam2_predictor(sam2_checkpoint)
+        # TODO add function to load DLC keypoints
+        # TODO if somehow detect centroid if not DLC keypoints
+        masks, _ = segment_chunk(chunk, predictor, points, clean_params, inference_state=None)
+        chunk = chunk * masks
+    
 
     # Denoise the frames before we do anything else
     filtered_frames = clean_frames(
