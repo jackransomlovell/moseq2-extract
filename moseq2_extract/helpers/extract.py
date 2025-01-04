@@ -3,6 +3,7 @@ Extraction-helper utility functions.
 """
 
 import numpy as np
+from pathlib import Path
 import ruamel.yaml as yaml
 from os.path import exists, basename, dirname, join, abspath
 from os import makedirs, system
@@ -157,12 +158,12 @@ def process_extract_batches(
         offset = config_data["chunk_overlap"] if i > 0 else 0
 
         # load DLC keypoints if available
-        if config_data["dlc_keypoints"]:
+        if config_data["dlc_filename"]:
             # get keypoints and bodyparts from config
-            csv = config_data["dlc_keypoints"]
+            csv = Path(input_file).parents[0] / config_data["dlc_filename"]
             bodyparts = config_data["dlc_bodyparts"]
             # load DLC data
-            sam2_points = load_dlc(csv, bodyparts, frame_range)
+            sam2_points = load_dlc(csv, bodyparts, frame_range, roi)
             # add to config_data
             config_data["sam2_points"] = sam2_points
 
