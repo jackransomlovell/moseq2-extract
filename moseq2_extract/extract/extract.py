@@ -143,10 +143,20 @@ def extract_chunk(
     }
 
     if sam2:
+        # get the sam2 predictor
         predictor = get_sam2_predictor(sam2_checkpoint)
         # TODO add function to load DLC keypoints
         # TODO if somehow detect centroid if not DLC keypoints
-        masks, _ = segment_chunk(chunk, predictor, points, clean_params, inference_state=None)
+
+        # get masks from sam2
+        masks, _ = segment_chunk(
+            chunk, 
+            predictor, 
+            points, 
+            clean_params, 
+            inference_state=None
+            )
+        # apply masks to chunk
         chunk = chunk * masks
     
 
