@@ -58,6 +58,7 @@ def extract_chunk(
     compute_raw_scalars=False,
     sam2=False,
     sam2_checkpoint=None,
+    sam2_points=None,
     **kwargs
 ):
     """
@@ -152,7 +153,7 @@ def extract_chunk(
         masks, _ = segment_chunk(
             chunk, 
             predictor, 
-            points, 
+            sam2_points, 
             clean_params, 
             inference_state=None
             )
