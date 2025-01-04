@@ -9,7 +9,7 @@ from moseq2_extract.extract.proc import clean_frames
 from sam2.build_sam import build_sam2_video_predictor
 
 
-def load_dlc(csv, bodyparts, frame_range):
+def load_dlc(csv, bodyparts, frame_range, roi):
     """
     Load DLC data from a CSV file and extract the specified body parts.
 
@@ -34,6 +34,8 @@ def load_dlc(csv, bodyparts, frame_range):
     keypoints_df = keypoints_df[[c for c in keypoints_df.columns if c in bodyparts]]
     keypoints_df = keypoints_df.loc[frame_range]
     input_point = keypoints_df.iloc[0, :].values.reshape(-1, 2)
+    # subtract the ROI offset
+    input_point -= roi[:2]
 
     return input_point
 
