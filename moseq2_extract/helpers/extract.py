@@ -11,6 +11,8 @@ from moseq2_extract.extract.extract import extract_chunk
 from moseq2_extract.util import read_yaml
 from moseq2_extract.io.video import load_movie_data, write_frames_preview
 from moseq2_extract.helpers.data import check_completion_status
+import pandas as pd
+from moseq2_extract.extract.sam2 import load_dlc
 
 
 def write_extracted_chunk_to_h5(
@@ -153,6 +155,16 @@ def process_extract_batches(
         )
 
         offset = config_data["chunk_overlap"] if i > 0 else 0
+
+        # load DLC keypoints if available
+        if config_data["dlc_keypoints"]:
+            # get keypoints and bodyparts from config
+            csv = config_data["dlc_keypoints"]
+            bodyparts = config_data["dlc_bodyparts"]
+            # load DLC data
+            sam2_points = load_dlc(csv, bodyparts, frame_range)
+            # add to config_data
+            config_data["sam2_points"] = sam2_points
 
         # Get crop-rotated frame batch
         results = extract_chunk(
